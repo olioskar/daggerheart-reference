@@ -1540,20 +1540,26 @@ export default function DaggerheartRef() {
             cursor: "pointer"
           }}
         >All</button>
-        {data.map(c => {
+        {[...data].sort((a, b) => {
+          const aCard = a.category.includes("Domain Cards") ? 1 : 0;
+          const bCard = b.category.includes("Domain Cards") ? 1 : 0;
+          return aCard - bCard;
+        }).map(c => {
           const label = c.category.replace(/^[^\w]*/, "").trim();
+          const isCard = c.category.includes("Domain Cards");
+          const isActive = filter === c.category;
           return (
             <button
               key={c.category}
-              onClick={() => { setFilter(filter === c.category ? null : c.category); setSearch(""); }}
+              onClick={() => { setFilter(isActive ? null : c.category); setSearch(""); }}
               style={{
                 padding: "4px 10px",
                 borderRadius: 20,
                 border: "1px solid",
-                borderColor: filter === c.category ? c.color : "#444",
-                background: filter === c.category ? c.color : "transparent",
-                color: filter === c.category ? "#fff" : "#999",
-                fontSize: 11,
+                borderColor: isActive ? c.color : isCard ? "#333" : "#444",
+                background: isActive ? c.color : isCard ? "rgba(255,255,255,0.03)" : "transparent",
+                color: isActive ? "#fff" : isCard ? "#777" : "#999",
+                fontSize: isCard ? 10 : 11,
                 fontWeight: 600,
                 cursor: "pointer",
                 whiteSpace: "nowrap"
