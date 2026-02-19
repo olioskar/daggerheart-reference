@@ -1477,9 +1477,11 @@ export default function DaggerheartRef() {
       maxWidth: 720,
       margin: "0 auto",
       padding: "20px 16px",
-      background: "#0f0f13",
+      background: "transparent",
       minHeight: "100vh",
-      color: "#e2e2e8"
+      color: "#e2e2e8",
+      position: "relative",
+      zIndex: 1
     }}>
       <div style={{ textAlign: "center", marginBottom: 20 }}>
         <h1 style={{
