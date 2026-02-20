@@ -1512,11 +1512,11 @@ export default function DaggerheartRef() {
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
   const [isTwoColumn, setIsTwoColumn] = useState(() =>
-    window.matchMedia("(min-width: 1180px)").matches
+    window.matchMedia("(min-width: 800px)").matches
   );
 
   useEffect(() => {
-    const mql = window.matchMedia("(min-width: 1180px)");
+    const mql = window.matchMedia("(min-width: 800px)");
     const handler = (e) => setIsTwoColumn(e.matches);
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
@@ -1752,30 +1752,25 @@ export default function DaggerheartRef() {
         {selectAllButton}
       </div>
 
-      {isTwoColumn ? (
-        <>
-          <div style={{ marginBottom: 18 }}>
-            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
-          </div>
+      <div style={{
+        maxWidth: isTwoColumn ? 885 : undefined,
+        margin: isTwoColumn ? "0 auto 18px" : "0 0 18px"
+      }}>
+        {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+        {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+      </div>
 
-          <div style={{
-            columns: "2 540px",
-            columnGap: 40,
-            maxWidth: 1120,
-            margin: "0 auto"
-          }}>
-            {renderCategories(orderedFiltered)}
-          </div>
-        </>
-      ) : (
-        <>
-          <div style={{ marginBottom: 18 }}>
-            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
-          </div>
+      {isTwoColumn ? (
+        <div style={{
+          columns: 2,
+          columnGap: 40,
+          maxWidth: 1120,
+          margin: "0 auto"
+        }}>
           {renderCategories(orderedFiltered)}
-        </>
+        </div>
+      ) : (
+        renderCategories(orderedFiltered)
       )}
 
       {filtered.length === 0 && (
