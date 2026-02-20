@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const data = [
   {
@@ -1448,10 +1448,79 @@ const data = [
   }
 ];
 
+const RULES_MECHANICS = [
+  "🎲 Running the Game (GM)",
+  "🧭 Character Creation",
+  "🎲 Core Rolls",
+  "⚔️ Combat & Damage",
+  "🛡️ Conditions & Effects",
+  "📦 Resources",
+  "🏕️ Downtime & Death",
+  "🎭 Spotlight & GM",
+  "📈 Leveling & Advancement",
+  "🗡️ Equipment & Loot",
+  "✨ Spellcasting",
+  "❓ Edge Cases & Tips",
+];
+
+const CARDS_HERITAGE = [
+  "⚔️ Classes & Subclasses",
+  "🧬 Ancestries (18)",
+  "🏘️ Communities (9)",
+  "🔮 Arcana Domain Cards",
+  "⚔️ Blade Domain Cards",
+  "🦴 Bone Domain Cards",
+  "📖 Codex Domain Cards",
+  "🎭 Grace Domain Cards",
+  "🌑 Midnight Domain Cards",
+  "🌿 Sage Domain Cards",
+  "✨ Splendor Domain Cards",
+  "🛡️ Valor Domain Cards",
+];
+
+const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
+
+const PILL_TINTS = {
+  "🎲 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
+  "🧭 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
+  "🎲 Core Rolls": { bg: "rgba(56, 189, 248, 0.08)", border: "rgba(56, 189, 248, 0.25)" },
+  "⚔️ Combat & Damage": { bg: "rgba(249, 115, 22, 0.08)", border: "rgba(249, 115, 22, 0.25)" },
+  "🛡️ Conditions & Effects": { bg: "rgba(132, 204, 22, 0.08)", border: "rgba(132, 204, 22, 0.25)" },
+  "📦 Resources": { bg: "rgba(34, 211, 238, 0.08)", border: "rgba(34, 211, 238, 0.25)" },
+  "🏕️ Downtime & Death": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
+  "🎭 Spotlight & GM": { bg: "rgba(244, 63, 94, 0.08)", border: "rgba(244, 63, 94, 0.25)" },
+  "📈 Leveling & Advancement": { bg: "rgba(192, 38, 211, 0.08)", border: "rgba(192, 38, 211, 0.25)" },
+  "🗡️ Equipment & Loot": { bg: "rgba(168, 162, 158, 0.08)", border: "rgba(168, 162, 158, 0.25)" },
+  "✨ Spellcasting": { bg: "rgba(167, 139, 250, 0.08)", border: "rgba(167, 139, 250, 0.25)" },
+  "❓ Edge Cases & Tips": { bg: "rgba(148, 163, 184, 0.08)", border: "rgba(148, 163, 184, 0.25)" },
+  "🔮 Arcana Domain Cards": { bg: "rgba(124, 58, 237, 0.08)", border: "rgba(124, 58, 237, 0.25)" },
+  "⚔️ Blade Domain Cards": { bg: "rgba(220, 38, 38, 0.08)", border: "rgba(220, 38, 38, 0.25)" },
+  "🦴 Bone Domain Cards": { bg: "rgba(120, 113, 108, 0.08)", border: "rgba(120, 113, 108, 0.25)" },
+  "📖 Codex Domain Cards": { bg: "rgba(37, 99, 235, 0.08)", border: "rgba(37, 99, 235, 0.25)" },
+  "🎭 Grace Domain Cards": { bg: "rgba(236, 72, 153, 0.08)", border: "rgba(236, 72, 153, 0.25)" },
+  "🌑 Midnight Domain Cards": { bg: "rgba(67, 56, 202, 0.08)", border: "rgba(67, 56, 202, 0.25)" },
+  "🌿 Sage Domain Cards": { bg: "rgba(22, 163, 106, 0.08)", border: "rgba(22, 163, 106, 0.25)" },
+  "✨ Splendor Domain Cards": { bg: "rgba(234, 179, 8, 0.08)", border: "rgba(234, 179, 8, 0.25)" },
+  "🛡️ Valor Domain Cards": { bg: "rgba(185, 28, 28, 0.08)", border: "rgba(185, 28, 28, 0.25)" },
+  "⚔️ Classes & Subclasses": { bg: "rgba(220, 38, 38, 0.07)", border: "rgba(220, 38, 38, 0.22)" },
+  "🧬 Ancestries (18)": { bg: "rgba(139, 92, 246, 0.07)", border: "rgba(139, 92, 246, 0.22)" },
+  "🏘️ Communities (9)": { bg: "rgba(13, 148, 136, 0.07)", border: "rgba(13, 148, 136, 0.22)" },
+};
+
 export default function DaggerheartRef() {
   const [openQ, setOpenQ] = useState(null);
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
+  const [isTwoColumn, setIsTwoColumn] = useState(() =>
+    window.matchMedia("(min-width: 1540px)").matches
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1540px)");
+    const handler = (e) => setIsTwoColumn(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   const toggle = (key) => setOpenQ(openQ === key ? null : key);
 
@@ -1462,7 +1531,7 @@ export default function DaggerheartRef() {
   };
 
   const filtered = data
-    .filter(c => !filter || c.category === filter)
+    .filter(c => filter === null || filter.has(c.category))
     .map(c => ({
       ...c,
       questions: c.questions.filter(matchesSearch)
@@ -1471,10 +1540,173 @@ export default function DaggerheartRef() {
 
   const totalQ = data.reduce((s, c) => s + c.questions.length, 0);
 
+  const orderedFiltered = ALL_CATEGORIES
+    .map(cat => filtered.find(f => f.category === cat))
+    .filter(Boolean);
+
+  const leftCategories = orderedFiltered.filter((_, i) => i % 2 === 0);
+  const rightCategories = orderedFiltered.filter((_, i) => i % 2 !== 0);
+
+  const handlePillClick = (category) => {
+    if (filter === null) {
+      setFilter(new Set([category]));
+    } else if (filter.has(category)) {
+      if (filter.size <= 1) {
+        setFilter(null);
+      } else {
+        const next = new Set(filter);
+        next.delete(category);
+        setFilter(next);
+      }
+    } else {
+      setFilter(new Set([...filter, category]));
+    }
+    setSearch("");
+  };
+
+  const renderPill = (c) => {
+    const label = c.category.replace(/^[^\w]*/, "").trim();
+    const isActive = filter !== null && filter.has(c.category);
+    const tint = PILL_TINTS[c.category];
+    return (
+      <button
+        key={c.category}
+        onClick={() => handlePillClick(c.category)}
+        style={{
+          padding: "4px 10px",
+          borderRadius: 20,
+          border: "1px solid",
+          borderColor: isActive ? c.color : tint ? tint.border : "#444",
+          background: isActive ? c.color : tint ? tint.bg : "transparent",
+          color: isActive ? "#fff" : "#999",
+          fontSize: 11,
+          fontWeight: 600,
+          cursor: "pointer",
+          whiteSpace: "nowrap"
+        }}
+      >{label}</button>
+    );
+  };
+
+  const renderCategories = (categories) =>
+    categories.map(cat => (
+      <div key={cat.category} style={{ marginBottom: 18 }}>
+        <div style={{
+          fontSize: 11,
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: cat.color,
+          marginBottom: 6,
+          paddingLeft: 4
+        }}>
+          {cat.category}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          {cat.questions.map((item, i) => {
+            const key = `${cat.category}-${i}`;
+            const isOpen = openQ === key;
+            return (
+              <div key={key}>
+                <button
+                  onClick={() => toggle(key)}
+                  style={{
+                    width: "100%",
+                    textAlign: "left",
+                    padding: "9px 12px",
+                    background: isOpen ? "#1a1a24" : "#15151e",
+                    border: "1px solid",
+                    borderColor: isOpen ? cat.color + "66" : "#222230",
+                    borderRadius: isOpen ? "8px 8px 0 0" : 8,
+                    color: isOpen ? "#fff" : "#ccc",
+                    fontSize: 13,
+                    fontWeight: isOpen ? 600 : 500,
+                    cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    lineHeight: 1.3
+                  }}
+                >
+                  <span>{item.q}</span>
+                  <span style={{
+                    fontSize: 16,
+                    color: cat.color,
+                    transform: isOpen ? "rotate(45deg)" : "none",
+                    transition: "transform 0.15s",
+                    flexShrink: 0,
+                    marginLeft: 8
+                  }}>+</span>
+                </button>
+                {isOpen && (
+                  <div style={{
+                    padding: "10px 12px",
+                    background: "#1a1a24",
+                    border: "1px solid " + cat.color + "66",
+                    borderTop: "none",
+                    borderRadius: "0 0 8px 8px",
+                    fontSize: 12.5,
+                    lineHeight: 1.6,
+                    color: "#c0c0cc",
+                    whiteSpace: "pre-line"
+                  }}>
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ));
+
+  const renderPillGroup = (columnOrder, groupLabel, labelColor) => {
+    const cats = columnOrder.map(cat => data.find(d => d.category === cat)).filter(Boolean);
+    return (
+      <div>
+        <div style={{
+          fontSize: 10,
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: "0.12em",
+          color: labelColor,
+          marginBottom: 8
+        }}>
+          {groupLabel}
+        </div>
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 5,
+          marginBottom: 18
+        }}>
+          {cats.map(renderPill)}
+        </div>
+      </div>
+    );
+  };
+
+  const selectAllButton = (
+    <button
+      onClick={() => { setFilter(null); setSearch(""); }}
+      style={{
+        padding: "4px 10px",
+        borderRadius: 20,
+        border: "1px solid",
+        borderColor: filter === null && !search ? "#fff" : "#444",
+        background: filter === null && !search ? "#fff" : "transparent",
+        color: filter === null && !search ? "#0f0f13" : "#999",
+        fontSize: 11,
+        fontWeight: 600,
+        cursor: "pointer"
+      }}
+    >Select All</button>
+  );
+
   return (
     <div style={{
       fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
-      maxWidth: 720,
+      maxWidth: isTwoColumn ? 1540 : 720,
       margin: "0 auto",
       padding: "20px 16px",
       background: "transparent",
@@ -1499,7 +1731,7 @@ export default function DaggerheartRef() {
         </p>
       </div>
 
-      <div style={{ marginBottom: 12 }}>
+      <div style={{ maxWidth: 720, margin: "0 auto 12px" }}>
         <input
           type="text"
           placeholder="Search rules, classes, ancestries..."
@@ -1519,126 +1751,56 @@ export default function DaggerheartRef() {
         />
       </div>
 
-      <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 5,
-        marginBottom: 18,
-        justifyContent: "center"
-      }}>
-        <button
-          onClick={() => { setFilter(null); setSearch(""); }}
-          style={{
-            padding: "4px 10px",
-            borderRadius: 20,
-            border: "1px solid",
-            borderColor: !filter && !search ? "#fff" : "#444",
-            background: !filter && !search ? "#fff" : "transparent",
-            color: !filter && !search ? "#0f0f13" : "#999",
-            fontSize: 11,
-            fontWeight: 600,
-            cursor: "pointer"
-          }}
-        >All</button>
-        {[...data].sort((a, b) => {
-          const aCard = a.category.includes("Domain Cards") ? 1 : 0;
-          const bCard = b.category.includes("Domain Cards") ? 1 : 0;
-          return aCard - bCard;
-        }).map(c => {
-          const label = c.category.replace(/^[^\w]*/, "").trim();
-          const isCard = c.category.includes("Domain Cards");
-          const isActive = filter === c.category;
-          return (
-            <button
-              key={c.category}
-              onClick={() => { setFilter(isActive ? null : c.category); setSearch(""); }}
-              style={{
-                padding: "4px 10px",
-                borderRadius: 20,
-                border: "1px solid",
-                borderColor: isActive ? c.color : isCard ? "#333" : "#444",
-                background: isActive ? c.color : isCard ? "rgba(255,255,255,0.03)" : "transparent",
-                color: isActive ? "#fff" : isCard ? "#777" : "#999",
-                fontSize: isCard ? 10 : 11,
-                fontWeight: 600,
-                cursor: "pointer",
-                whiteSpace: "nowrap"
-              }}
-            >{label}</button>
-          );
-        })}
+      <div style={{ maxWidth: 720, margin: "0 auto 14px" }}>
+        {selectAllButton}
       </div>
 
-      {filtered.map(cat => (
-        <div key={cat.category} style={{ marginBottom: 18 }}>
+      {isTwoColumn ? (
+        <>
           <div style={{
-            fontSize: 11,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: cat.color,
-            marginBottom: 6,
-            paddingLeft: 4
+            display: "flex",
+            gap: 40,
+            justifyContent: "center",
+            marginBottom: 18
           }}>
-            {cat.category}
+            <div style={{ flex: "0 0 720px" }}>
+              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+            </div>
+            <div style={{ flex: "0 0 720px" }}>
+              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-            {cat.questions.map((item, i) => {
-              const key = `${cat.category}-${i}`;
-              const isOpen = openQ === key;
-              return (
-                <div key={key}>
-                  <button
-                    onClick={() => toggle(key)}
-                    style={{
-                      width: "100%",
-                      textAlign: "left",
-                      padding: "9px 12px",
-                      background: isOpen ? "#1a1a24" : "#15151e",
-                      border: "1px solid",
-                      borderColor: isOpen ? cat.color + "66" : "#222230",
-                      borderRadius: isOpen ? "8px 8px 0 0" : 8,
-                      color: isOpen ? "#fff" : "#ccc",
-                      fontSize: 13,
-                      fontWeight: isOpen ? 600 : 500,
-                      cursor: "pointer",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      lineHeight: 1.3
-                    }}
-                  >
-                    <span>{item.q}</span>
-                    <span style={{
-                      fontSize: 16,
-                      color: cat.color,
-                      transform: isOpen ? "rotate(45deg)" : "none",
-                      transition: "transform 0.15s",
-                      flexShrink: 0,
-                      marginLeft: 8
-                    }}>+</span>
-                  </button>
-                  {isOpen && (
-                    <div style={{
-                      padding: "10px 12px",
-                      background: "#1a1a24",
-                      border: "1px solid " + cat.color + "66",
-                      borderTop: "none",
-                      borderRadius: "0 0 8px 8px",
-                      fontSize: 12.5,
-                      lineHeight: 1.6,
-                      color: "#c0c0cc",
-                      whiteSpace: "pre-line"
-                    }}>
-                      {item.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+
+          <div style={{
+            display: "flex",
+            gap: 40,
+            justifyContent: "center",
+            alignItems: "flex-start"
+          }}>
+            <div style={{ flex: "0 0 720px" }}>
+              {renderCategories(leftCategories)}
+            </div>
+            <div style={{ flex: "0 0 720px" }}>
+              {renderCategories(rightCategories)}
+            </div>
           </div>
-        </div>
-      ))}
+        </>
+      ) : (
+        <>
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 5,
+            marginBottom: 18
+          }}>
+            {ALL_CATEGORIES
+              .map(cat => data.find(d => d.category === cat))
+              .filter(Boolean)
+              .map(renderPill)}
+          </div>
+          {renderCategories(orderedFiltered)}
+        </>
+      )}
 
       {filtered.length === 0 && (
         <div style={{ textAlign: "center", color: "#555", padding: 40, fontSize: 14 }}>
