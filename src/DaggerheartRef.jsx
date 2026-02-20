@@ -1512,11 +1512,11 @@ export default function DaggerheartRef() {
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
   const [isTwoColumn, setIsTwoColumn] = useState(() =>
-    window.matchMedia("(min-width: 1540px)").matches
+    window.matchMedia("(min-width: 1180px)").matches
   );
 
   useEffect(() => {
-    const mql = window.matchMedia("(min-width: 1540px)");
+    const mql = window.matchMedia("(min-width: 1180px)");
     const handler = (e) => setIsTwoColumn(e.matches);
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
@@ -1703,7 +1703,7 @@ export default function DaggerheartRef() {
   return (
     <div style={{
       fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
-      maxWidth: isTwoColumn ? 1540 : 720,
+      maxWidth: isTwoColumn ? 1180 : 540,
       margin: "0 auto",
       padding: "20px 16px",
       background: "transparent",
@@ -1728,7 +1728,7 @@ export default function DaggerheartRef() {
         </p>
       </div>
 
-      <div style={{ maxWidth: 720, margin: "0 auto 12px" }}>
+      <div style={{ maxWidth: 540, margin: "0 auto 12px" }}>
         <input
           type="text"
           placeholder="Search rules, classes, ancestries..."
@@ -1748,7 +1748,7 @@ export default function DaggerheartRef() {
         />
       </div>
 
-      <div style={{ maxWidth: 720, margin: "0 auto 14px" }}>
+      <div style={{ maxWidth: 540, margin: "0 auto 14px" }}>
         {selectAllButton}
       </div>
 
@@ -1760,9 +1760,9 @@ export default function DaggerheartRef() {
           </div>
 
           <div style={{
-            columns: "2 720px",
+            columns: "2 540px",
             columnGap: 40,
-            maxWidth: 1480,
+            maxWidth: 1120,
             margin: "0 auto"
           }}>
             {renderCategories(orderedFiltered)}
