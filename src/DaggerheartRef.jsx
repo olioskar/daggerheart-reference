@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./DaggerheartRef.css";
 
 const data = [
   {
@@ -1483,9 +1484,9 @@ const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 const TOTAL_QUESTIONS = data.reduce((sum, c) => sum + c.questions.length, 0);
 
 const ACTION_PILLS = [
-  { label: "Rules & Mechanics", rgb: "196, 150, 60", categories: RULES_MECHANICS },
-  { label: "Cards, Classes & Heritage", rgb: "150, 120, 195", categories: CARDS_HERITAGE },
-  { label: "Clear Filters", rgb: "85, 170, 150", categories: null },
+  { label: "Rules & Mechanics", cls: "dhr-action-pill--rules", categories: RULES_MECHANICS },
+  { label: "Cards, Classes & Heritage", cls: "dhr-action-pill--cards", categories: CARDS_HERITAGE },
+  { label: "Clear Filters", cls: "dhr-action-pill--clear", categories: null },
 ];
 
 const PILL_TINTS = {
@@ -1575,51 +1576,33 @@ export default function DaggerheartRef() {
       (search && filtered.some(f => f.category === c.category));
     const tint = PILL_TINTS[c.category];
 
-    let borderColor = "#444";
-    let background = "transparent";
+    let pillBorder = "#444";
+    let pillBg = "transparent";
     if (isActive) {
-      borderColor = c.color + "77";
-      background = c.color + "33";
+      pillBorder = c.color + "77";
+      pillBg = c.color + "33";
     } else if (tint) {
-      borderColor = tint.border;
-      background = tint.bg;
+      pillBorder = tint.border;
+      pillBg = tint.bg;
     }
 
     return (
       <button
         key={c.category}
         onClick={() => handlePillClick(c.category)}
-        style={{
-          padding: "4px 10px",
-          borderRadius: 20,
-          border: "1px solid",
-          borderColor,
-          background,
-          color: isActive ? "#ddd" : "#999",
-          fontSize: 11,
-          fontWeight: 600,
-          cursor: "pointer",
-          whiteSpace: "nowrap"
-        }}
+        className={`dhr-category-pill${isActive ? " dhr-category-pill--active" : ""}`}
+        style={{ "--pill-border": pillBorder, "--pill-bg": pillBg }}
       >{label}</button>
     );
   }
 
   function renderCategories(categories) {
     return categories.map(cat => (
-      <div key={cat.category} style={{ marginBottom: 18, breakInside: "avoid" }}>
-        <div style={{
-          fontSize: 11,
-          fontWeight: 700,
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-          color: cat.color,
-          marginBottom: 6,
-          paddingLeft: 4
-        }}>
+      <div key={cat.category} className="dhr-category" style={{ "--cat-color": cat.color, "--cat-color-40": cat.color + "66" }}>
+        <div className="dhr-category__label">
           {cat.category}
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        <div className="dhr-category__list">
           {cat.questions.map((item, i) => {
             const key = `${cat.category}-${i}`;
             const isOpen = openQ === key;
@@ -1627,46 +1610,13 @@ export default function DaggerheartRef() {
               <div key={key}>
                 <button
                   onClick={() => toggle(key)}
-                  style={{
-                    width: "100%",
-                    textAlign: "left",
-                    padding: "9px 12px",
-                    background: isOpen ? "#1a1a24" : "#15151e",
-                    border: "1px solid",
-                    borderColor: isOpen ? cat.color + "66" : "#222230",
-                    borderRadius: isOpen ? "8px 8px 0 0" : 8,
-                    color: isOpen ? "#fff" : "#ccc",
-                    fontSize: 13,
-                    fontWeight: isOpen ? 600 : 500,
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    lineHeight: 1.3
-                  }}
+                  className={`dhr-qa-question${isOpen ? " dhr-qa-question--open" : ""}`}
                 >
                   <span>{item.q}</span>
-                  <span style={{
-                    fontSize: 16,
-                    color: cat.color,
-                    transform: isOpen ? "rotate(45deg)" : "none",
-                    transition: "transform 0.15s",
-                    flexShrink: 0,
-                    marginLeft: 8
-                  }}>+</span>
+                  <span className={`dhr-qa-icon${isOpen ? " dhr-qa-icon--open" : ""}`}>+</span>
                 </button>
                 {isOpen && (
-                  <div style={{
-                    padding: "10px 12px",
-                    background: "#1a1a24",
-                    border: "1px solid " + cat.color + "66",
-                    borderTop: "none",
-                    borderRadius: "0 0 8px 8px",
-                    fontSize: 12.5,
-                    lineHeight: 1.6,
-                    color: "#c0c0cc",
-                    whiteSpace: "pre-line"
-                  }}>
+                  <div className="dhr-qa-answer">
                     {item.a}
                   </div>
                 )}
@@ -1678,26 +1628,14 @@ export default function DaggerheartRef() {
     ));
   }
 
-  function renderPillGroup(columnOrder, groupLabel, labelColor) {
+  function renderPillGroup(columnOrder, groupLabel, labelCls) {
     const cats = columnOrder.map(cat => data.find(d => d.category === cat)).filter(Boolean);
     return (
       <div>
-        <div style={{
-          fontSize: 10,
-          fontWeight: 700,
-          textTransform: "uppercase",
-          letterSpacing: "0.12em",
-          color: labelColor,
-          marginBottom: 8
-        }}>
+        <div className={`dhr-pill-group-label ${labelCls}`}>
           {groupLabel}
         </div>
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 5,
-          marginBottom: 18
-        }}>
+        <div className="dhr-pill-group-pills">
           {cats.map(renderPill)}
         </div>
       </div>
@@ -1718,131 +1656,63 @@ export default function DaggerheartRef() {
         <button
           key={pill.label}
           onClick={() => handleActionClick(pill)}
-          style={{
-            padding: "4px 10px",
-            borderRadius: 20,
-            border: "1px solid",
-            borderColor: `rgba(${pill.rgb}, ${isFlashing ? 0.5 : 0.25})`,
-            background: `rgba(${pill.rgb}, ${isFlashing ? 0.2 : 0.08})`,
-            color: isFlashing ? "#ccc" : "#999",
-            fontSize: 11,
-            fontWeight: 600,
-            cursor: "pointer",
-            whiteSpace: "nowrap",
-            transition: "all 0.15s ease"
-          }}
+          className={`dhr-action-pill ${pill.cls}${isFlashing ? " dhr-action-pill--flash" : ""}`}
         >{pill.label}</button>
       );
     });
   }
 
   return (
-    <div style={{
-      fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
-      maxWidth: isTwoColumn ? 1180 : 540,
-      margin: "0 auto",
-      padding: "20px 16px",
-      background: "transparent",
-      minHeight: "100vh",
-      color: "#e2e2e8",
-      position: "relative",
-      zIndex: 1
-    }}>
-      <div style={{ textAlign: "center", marginBottom: 20 }}>
-        <h1 style={{
-          fontSize: 22,
-          fontWeight: 700,
-          color: "#f0f0f5",
-          margin: 0,
-          letterSpacing: "0.05em",
-          textTransform: "uppercase"
-        }}>
+    <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
+      <div className="dhr-header">
+        <h1 className="dhr-header__title">
           ⚔️ Daggerheart Quick Reference
         </h1>
-        <p style={{ fontSize: 12, color: "#666", margin: "6px 0 0" }}>
+        <p className="dhr-header__subtitle">
           {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand
         </p>
       </div>
 
-      <div style={{ maxWidth: 540, margin: "0 auto 12px" }}>
+      <div className="dhr-search-wrapper">
         <input
           type="text"
           placeholder="Search rules, classes, ancestries..."
           value={search}
           onChange={e => { setSearch(e.target.value); setFilter(null); }}
-          style={{
-            width: "100%",
-            padding: "9px 14px",
-            background: "#1a1a24",
-            border: "1px solid #333",
-            borderRadius: 8,
-            color: "#ddd",
-            fontSize: 14,
-            outline: "none",
-            boxSizing: "border-box"
-          }}
+          className="dhr-search-input"
         />
       </div>
 
       {isTwoColumn ? (
         <>
-          <div style={{
-            display: "flex",
-            gap: 40,
-            alignItems: "flex-start",
-            maxWidth: 1120,
-            margin: "0 auto 18px"
-          }}>
-            <div style={{ flex: "1 1 0", minWidth: 0 }}>
-              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+          <div className="dhr-pills-row">
+            <div className="dhr-pills-col-left">
+              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "dhr-pill-group-label--rules")}
+              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "dhr-pill-group-label--cards")}
             </div>
-            <div style={{ flexShrink: 0 }}>
-              <div style={{
-                fontSize: 10,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "#e88a9a",
-                marginBottom: 8,
-                textAlign: "right"
-              }}>
+            <div className="dhr-pills-col-right">
+              <div className="dhr-quick-select-label">
                 Quick Select
               </div>
-              <div style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-end",
-                gap: 6
-              }}>
+              <div className="dhr-action-pills-stack">
                 {renderActionPills()}
               </div>
             </div>
           </div>
 
-          <div style={{
-            columns: 2,
-            columnGap: 40,
-            maxWidth: 1120,
-            margin: "0 auto"
-          }}>
+          <div className="dhr-columns-grid">
             {renderCategories(orderedFiltered)}
           </div>
         </>
       ) : (
         <>
-          <div style={{
-            display: "flex",
-            gap: 5,
-            justifyContent: "center",
-            marginBottom: 14
-          }}>
+          <div className="dhr-action-pills-row">
             {renderActionPills()}
           </div>
 
-          <div style={{ marginBottom: 18 }}>
-            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+          <div className="dhr-pill-groups-wrapper">
+            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "dhr-pill-group-label--rules")}
+            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "dhr-pill-group-label--cards")}
           </div>
 
           {renderCategories(orderedFiltered)}
@@ -1850,18 +1720,12 @@ export default function DaggerheartRef() {
       )}
 
       {filtered.length === 0 && (
-        <div style={{ textAlign: "center", color: "#555", padding: 40, fontSize: 14 }}>
-          No results for "{search}"
+        <div className="dhr-no-results">
+          No results for &quot;{search}&quot;
         </div>
       )}
 
-      <div style={{
-        textAlign: "center",
-        fontSize: 10,
-        color: "#444",
-        marginTop: 20,
-        paddingBottom: 16
-      }}>
+      <div className="dhr-footer">
         Daggerheart © 2025 Critical Role LLC · Fan reference tool
       </div>
     </div>

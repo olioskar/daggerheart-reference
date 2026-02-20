@@ -1,0 +1,291 @@
+/* ── Root ── */
+.dhr-root {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  background: transparent;
+  min-height: 100vh;
+  color: #e2e2e8;
+  position: relative;
+  z-index: 1;
+}
+
+.dhr-root--two-column {
+  max-width: 1180px;
+}
+
+/* ── Header ── */
+.dhr-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dhr-header__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0f0f5;
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dhr-header__subtitle {
+  font-size: 12px;
+  color: #666;
+  margin: 6px 0 0;
+}
+
+/* ── Search ── */
+.dhr-search-wrapper {
+  max-width: 540px;
+  margin: 0 auto 12px;
+}
+
+.dhr-search-input {
+  width: 100%;
+  padding: 9px 14px;
+  background: #1a1a24;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #ddd;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* ── Pills row (two-column) ── */
+.dhr-pills-row {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  max-width: 1120px;
+  margin: 0 auto 18px;
+}
+
+.dhr-pills-col-left {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.dhr-pills-col-right {
+  flex-shrink: 0;
+}
+
+/* ── Quick Select label (two-column) ── */
+.dhr-quick-select-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #e88a9a;
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+/* ── Action pills stack (two-column) ── */
+.dhr-action-pills-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+/* ── Action pills row (single-column) ── */
+.dhr-action-pills-row {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+/* ── Pill groups wrapper (single-column) ── */
+.dhr-pill-groups-wrapper {
+  margin-bottom: 18px;
+}
+
+/* ── Pill group ── */
+.dhr-pill-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.dhr-pill-group-label--rules {
+  color: #f59e0b;
+}
+
+.dhr-pill-group-label--cards {
+  color: #8b5cf6;
+}
+
+.dhr-pill-group-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+/* ── Columns grid ── */
+.dhr-columns-grid {
+  columns: 2;
+  column-gap: 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ── Category ── */
+.dhr-category {
+  margin-bottom: 18px;
+  break-inside: avoid;
+}
+
+.dhr-category__label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cat-color);
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.dhr-category__list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ── Q&A question button ── */
+.dhr-qa-question {
+  width: 100%;
+  text-align: left;
+  padding: 9px 12px;
+  background: #15151e;
+  border: 1px solid #222230;
+  border-radius: 8px;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.3;
+}
+
+.dhr-qa-question--open {
+  background: #1a1a24;
+  border-color: var(--cat-color-40);
+  border-radius: 8px 8px 0 0;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Q&A icon ── */
+.dhr-qa-icon {
+  font-size: 16px;
+  color: var(--cat-color);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.dhr-qa-icon--open {
+  transform: rotate(45deg);
+}
+
+/* ── Q&A answer ── */
+.dhr-qa-answer {
+  padding: 10px 12px;
+  background: #1a1a24;
+  border: 1px solid var(--cat-color-40);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #c0c0cc;
+  white-space: pre-line;
+}
+
+/* ── Category pill ── */
+.dhr-category-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--pill-border, #444);
+  background: var(--pill-bg, transparent);
+  color: #999;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dhr-category-pill--active {
+  color: #ddd;
+}
+
+/* ── Action pill ── */
+.dhr-action-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+  color: #999;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.dhr-action-pill--rules {
+  border-color: rgba(196, 150, 60, 0.25);
+  background: rgba(196, 150, 60, 0.08);
+}
+
+.dhr-action-pill--rules.dhr-action-pill--flash {
+  border-color: rgba(196, 150, 60, 0.5);
+  background: rgba(196, 150, 60, 0.2);
+  color: #ccc;
+}
+
+.dhr-action-pill--cards {
+  border-color: rgba(150, 120, 195, 0.25);
+  background: rgba(150, 120, 195, 0.08);
+}
+
+.dhr-action-pill--cards.dhr-action-pill--flash {
+  border-color: rgba(150, 120, 195, 0.5);
+  background: rgba(150, 120, 195, 0.2);
+  color: #ccc;
+}
+
+.dhr-action-pill--clear {
+  border-color: rgba(85, 170, 150, 0.25);
+  background: rgba(85, 170, 150, 0.08);
+}
+
+.dhr-action-pill--clear.dhr-action-pill--flash {
+  border-color: rgba(85, 170, 150, 0.5);
+  background: rgba(85, 170, 150, 0.2);
+  color: #ccc;
+}
+
+/* ── No results ── */
+.dhr-no-results {
+  text-align: center;
+  color: #555;
+  padding: 40px;
+  font-size: 14px;
+}
+
+/* ── Footer ── */
+.dhr-footer {
+  text-align: center;
+  font-size: 10px;
+  color: #444;
+  margin-top: 20px;
+  padding-bottom: 16px;
+}
