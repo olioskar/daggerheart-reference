@@ -1780,11 +1780,12 @@ export default function DaggerheartRef() {
         <>
           <div style={{
             display: "flex",
-            justifyContent: "space-between",
+            gap: 40,
             alignItems: "flex-start",
-            marginBottom: 18
+            maxWidth: 1120,
+            margin: "0 auto 18px"
           }}>
-            <div style={{ flex: "1 1 0", maxWidth: 708, minWidth: 0, display: "flex", gap: 24 }}>
+            <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", gap: 24 }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
               </div>
@@ -1797,8 +1798,7 @@ export default function DaggerheartRef() {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-end",
-              gap: 6,
-              marginLeft: 24
+              gap: 6
             }}>
               {renderActionPills()}
             </div>
