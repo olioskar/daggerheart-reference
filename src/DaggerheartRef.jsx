@@ -1544,9 +1544,6 @@ export default function DaggerheartRef() {
     .map(cat => filtered.find(f => f.category === cat))
     .filter(Boolean);
 
-  const leftCategories = orderedFiltered.filter((_, i) => i % 2 === 0);
-  const rightCategories = orderedFiltered.filter((_, i) => i % 2 !== 0);
-
   const handlePillClick = (category) => {
     if (filter === null) {
       setFilter(new Set([category]));
@@ -1590,7 +1587,7 @@ export default function DaggerheartRef() {
 
   const renderCategories = (categories) =>
     categories.map(cat => (
-      <div key={cat.category} style={{ marginBottom: 18 }}>
+      <div key={cat.category} style={{ marginBottom: 18, breakInside: "avoid" }}>
         <div style={{
           fontSize: 11,
           fontWeight: 700,
@@ -1700,7 +1697,7 @@ export default function DaggerheartRef() {
         fontWeight: 600,
         cursor: "pointer"
       }}
-    >Select All</button>
+    >Show All</button>
   );
 
   return (
@@ -1772,17 +1769,12 @@ export default function DaggerheartRef() {
           </div>
 
           <div style={{
-            display: "flex",
-            gap: 40,
-            justifyContent: "center",
-            alignItems: "flex-start"
+            columns: "2 720px",
+            columnGap: 40,
+            maxWidth: 1480,
+            margin: "0 auto"
           }}>
-            <div style={{ flex: "0 0 720px" }}>
-              {renderCategories(leftCategories)}
-            </div>
-            <div style={{ flex: "0 0 720px" }}>
-              {renderCategories(rightCategories)}
-            </div>
+            {renderCategories(orderedFiltered)}
           </div>
         </>
       ) : (
