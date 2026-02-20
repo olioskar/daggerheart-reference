@@ -1754,18 +1754,9 @@ export default function DaggerheartRef() {
 
       {isTwoColumn ? (
         <>
-          <div style={{
-            display: "flex",
-            gap: 40,
-            justifyContent: "center",
-            marginBottom: 18
-          }}>
-            <div style={{ flex: "0 0 720px" }}>
-              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-            </div>
-            <div style={{ flex: "0 0 720px" }}>
-              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
-            </div>
+          <div style={{ marginBottom: 18 }}>
+            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
           </div>
 
           <div style={{
