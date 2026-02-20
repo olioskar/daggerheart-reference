@@ -1784,9 +1784,13 @@ export default function DaggerheartRef() {
             alignItems: "flex-start",
             marginBottom: 18
           }}>
-            <div style={{ flex: "1 1 0", maxWidth: 708, minWidth: 0 }}>
-              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+            <div style={{ flex: "1 1 0", maxWidth: 708, minWidth: 0, display: "flex", gap: 24 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+              </div>
             </div>
             <div style={{
               flexShrink: 0,
