@@ -1557,10 +1557,10 @@ export default function DaggerheartRef() {
 
   const filtered = data
     .filter(c => filter === null || filter.has(c.category))
-    .map(c => ({
-      ...c,
-      questions: c.questions.filter(matchesSearch)
-    }))
+    .map(c => {
+      if (search && c.category.toLowerCase().includes(searchLower)) return c;
+      return { ...c, questions: c.questions.filter(matchesSearch) };
+    })
     .filter(c => c.questions.length > 0);
 
   const orderedFiltered = (filter === null ? ALL_CATEGORIES : [...filter])
