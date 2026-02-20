@@ -1480,10 +1480,12 @@ const CARDS_HERITAGE = [
 
 const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 
+const TOTAL_QUESTIONS = data.reduce((sum, c) => sum + c.questions.length, 0);
+
 const ACTION_PILLS = [
-  { label: "Rules & Mechanics", rgb: "196, 150, 60" },
-  { label: "Cards, Classes & Heritage", rgb: "150, 120, 195" },
-  { label: "Clear Filters", rgb: "85, 170, 150" },
+  { label: "Rules & Mechanics", rgb: "196, 150, 60", categories: RULES_MECHANICS },
+  { label: "Cards, Classes & Heritage", rgb: "150, 120, 195", categories: CARDS_HERITAGE },
+  { label: "Clear Filters", rgb: "85, 170, 150", categories: null },
 ];
 
 const PILL_TINTS = {
@@ -1517,6 +1519,7 @@ export default function DaggerheartRef() {
   const [openQ, setOpenQ] = useState(null);
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
+  const [flashAction, setFlashAction] = useState(null);
   const [isTwoColumn, setIsTwoColumn] = useState(() =>
     window.matchMedia("(min-width: 800px)").matches
   );
@@ -1528,13 +1531,17 @@ export default function DaggerheartRef() {
     return () => mql.removeEventListener("change", handler);
   }, []);
 
-  const toggle = (key) => setOpenQ(openQ === key ? null : key);
+  function toggle(key) {
+    setOpenQ(openQ === key ? null : key);
+  }
 
-  const matchesSearch = (item) => {
+  const searchLower = search.toLowerCase();
+
+  function matchesSearch(item) {
     if (!search) return true;
-    const s = search.toLowerCase();
-    return item.q.toLowerCase().includes(s) || item.a.toLowerCase().includes(s);
-  };
+    return item.q.toLowerCase().includes(searchLower) ||
+      item.a.toLowerCase().includes(searchLower);
+  }
 
   const filtered = data
     .filter(c => filter === null || filter.has(c.category))
@@ -1544,34 +1551,40 @@ export default function DaggerheartRef() {
     }))
     .filter(c => c.questions.length > 0);
 
-  const totalQ = data.reduce((s, c) => s + c.questions.length, 0);
-
   const orderedFiltered = ALL_CATEGORIES
     .map(cat => filtered.find(f => f.category === cat))
     .filter(Boolean);
 
-  const handlePillClick = (category) => {
-    if (filter === null) {
-      setFilter(new Set([category]));
-    } else if (filter.has(category)) {
-      if (filter.size <= 1) {
-        setFilter(null);
-      } else {
-        const next = new Set(filter);
-        next.delete(category);
-        setFilter(next);
-      }
-    } else {
-      setFilter(new Set([...filter, category]));
-    }
-    setSearch("");
-  };
+  function handlePillClick(category) {
+    const active = filter ?? new Set();
+    const next = new Set(active);
 
-  const renderPill = (c) => {
+    if (next.has(category)) {
+      next.delete(category);
+    } else {
+      next.add(category);
+    }
+
+    setFilter(next.size > 0 ? next : null);
+    setSearch("");
+  }
+
+  function renderPill(c) {
     const label = c.category.replace(/^[^\w]*/, "").trim();
     const isActive = (filter !== null && filter.has(c.category)) ||
       (search && filtered.some(f => f.category === c.category));
     const tint = PILL_TINTS[c.category];
+
+    let borderColor = "#444";
+    let background = "transparent";
+    if (isActive) {
+      borderColor = c.color + "77";
+      background = c.color + "33";
+    } else if (tint) {
+      borderColor = tint.border;
+      background = tint.bg;
+    }
+
     return (
       <button
         key={c.category}
@@ -1580,8 +1593,8 @@ export default function DaggerheartRef() {
           padding: "4px 10px",
           borderRadius: 20,
           border: "1px solid",
-          borderColor: isActive ? c.color + "77" : tint ? tint.border : "#444",
-          background: isActive ? c.color + "33" : tint ? tint.bg : "transparent",
+          borderColor,
+          background,
           color: isActive ? "#ddd" : "#999",
           fontSize: 11,
           fontWeight: 600,
@@ -1590,10 +1603,10 @@ export default function DaggerheartRef() {
         }}
       >{label}</button>
     );
-  };
+  }
 
-  const renderCategories = (categories) =>
-    categories.map(cat => (
+  function renderCategories(categories) {
+    return categories.map(cat => (
       <div key={cat.category} style={{ marginBottom: 18, breakInside: "avoid" }}>
         <div style={{
           fontSize: 11,
@@ -1663,8 +1676,9 @@ export default function DaggerheartRef() {
         </div>
       </div>
     ));
+  }
 
-  const renderPillGroup = (columnOrder, groupLabel, labelColor) => {
+  function renderPillGroup(columnOrder, groupLabel, labelColor) {
     const cats = columnOrder.map(cat => data.find(d => d.category === cat)).filter(Boolean);
     return (
       <div>
@@ -1688,36 +1702,28 @@ export default function DaggerheartRef() {
         </div>
       </div>
     );
-  };
+  }
 
-  const [flashAction, setFlashAction] = useState(null);
-
-  const handleActionClick = (label) => {
-    if (label === "Rules & Mechanics") {
-      setFilter(new Set(RULES_MECHANICS));
-    } else if (label === "Cards, Classes & Heritage") {
-      setFilter(new Set(CARDS_HERITAGE));
-    } else {
-      setFilter(null);
-    }
+  function handleActionClick(pill) {
+    setFilter(pill.categories ? new Set(pill.categories) : null);
     setSearch("");
-    setFlashAction(label);
+    setFlashAction(pill.label);
     setTimeout(() => setFlashAction(null), 150);
-  };
+  }
 
-  const renderActionPills = () =>
-    ACTION_PILLS.map(({ label, rgb }) => {
-      const isFlashing = flashAction === label;
+  function renderActionPills() {
+    return ACTION_PILLS.map((pill) => {
+      const isFlashing = flashAction === pill.label;
       return (
         <button
-          key={label}
-          onClick={() => handleActionClick(label)}
+          key={pill.label}
+          onClick={() => handleActionClick(pill)}
           style={{
             padding: "4px 10px",
             borderRadius: 20,
             border: "1px solid",
-            borderColor: `rgba(${rgb}, ${isFlashing ? 0.5 : 0.25})`,
-            background: `rgba(${rgb}, ${isFlashing ? 0.2 : 0.08})`,
+            borderColor: `rgba(${pill.rgb}, ${isFlashing ? 0.5 : 0.25})`,
+            background: `rgba(${pill.rgb}, ${isFlashing ? 0.2 : 0.08})`,
             color: isFlashing ? "#ccc" : "#999",
             fontSize: 11,
             fontWeight: 600,
@@ -1725,9 +1731,10 @@ export default function DaggerheartRef() {
             whiteSpace: "nowrap",
             transition: "all 0.15s ease"
           }}
-        >{label}</button>
+        >{pill.label}</button>
       );
     });
+  }
 
   return (
     <div style={{
@@ -1753,7 +1760,7 @@ export default function DaggerheartRef() {
           ⚔️ Daggerheart Quick Reference
         </h1>
         <p style={{ fontSize: 12, color: "#666", margin: "6px 0 0" }}>
-          {totalQ} entries · SRD 1.0 (May 2025) · Tap to expand
+          {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand
         </p>
       </div>
 
@@ -1786,22 +1793,30 @@ export default function DaggerheartRef() {
             maxWidth: 1120,
             margin: "0 auto 18px"
           }}>
-            <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", gap: 24 }}>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
-              </div>
+            <div style={{ flex: "1 1 0", minWidth: 0 }}>
+              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
             </div>
-            <div style={{
-              flexShrink: 0,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              gap: 6
-            }}>
-              {renderActionPills()}
+            <div style={{ flexShrink: 0 }}>
+              <div style={{
+                fontSize: 10,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "#e88a9a",
+                marginBottom: 8,
+                textAlign: "right"
+              }}>
+                Quick Select
+              </div>
+              <div style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: 6
+              }}>
+                {renderActionPills()}
+              </div>
             </div>
           </div>
 
