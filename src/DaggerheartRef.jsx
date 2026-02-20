@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Moon, Sun } from "lucide-react";
 import "./DaggerheartRef.css";
 
 const data = [
@@ -1524,6 +1525,11 @@ export default function DaggerheartRef() {
   const [isTwoColumn, setIsTwoColumn] = useState(() =>
     window.matchMedia("(min-width: 800px)").matches
   );
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("dhr-theme") || "dark";
+    document.documentElement.dataset.theme = saved;
+    return saved;
+  });
 
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 800px)");
@@ -1531,6 +1537,11 @@ export default function DaggerheartRef() {
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("dhr-theme", theme);
+  }, [theme]);
 
   function toggle(key) {
     setOpenQ(openQ === key ? null : key);
@@ -1662,6 +1673,13 @@ export default function DaggerheartRef() {
     });
   }
 
+  const themeToggle = (
+    <button onClick={() => setTheme(t => t === "dark" ? "light" : "dark")} className="dhr-theme-toggle">
+      <Moon size={12} className={theme === "dark" ? "dhr-theme-icon--active" : "dhr-theme-icon"} />
+      <Sun size={12} className={theme === "light" ? "dhr-theme-icon--active" : "dhr-theme-icon"} />
+    </button>
+  );
+
   return (
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
       <div className="dhr-header">
@@ -1696,6 +1714,7 @@ export default function DaggerheartRef() {
               </div>
               <div className="dhr-action-pills-stack">
                 {renderActionPills()}
+                {themeToggle}
               </div>
             </div>
           </div>
@@ -1708,6 +1727,7 @@ export default function DaggerheartRef() {
         <>
           <div className="dhr-action-pills-row">
             {renderActionPills()}
+            {themeToggle}
           </div>
 
           <div className="dhr-pill-groups-wrapper">

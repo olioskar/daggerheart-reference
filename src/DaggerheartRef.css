@@ -6,7 +6,7 @@
   padding: 20px 16px;
   background: transparent;
   min-height: 100vh;
-  color: #e2e2e8;
+  color: var(--dhr-text);
   position: relative;
   z-index: 1;
 }
@@ -24,7 +24,7 @@
 .dhr-header__title {
   font-size: 22px;
   font-weight: 700;
-  color: #f0f0f5;
+  color: var(--dhr-text-heading);
   margin: 0;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -32,7 +32,7 @@
 
 .dhr-header__subtitle {
   font-size: 12px;
-  color: #666;
+  color: var(--dhr-text-faint);
   margin: 6px 0 0;
 }
 
@@ -45,10 +45,10 @@
 .dhr-search-input {
   width: 100%;
   padding: 9px 14px;
-  background: #1a1a24;
-  border: 1px solid #333;
+  background: var(--dhr-surface-raised);
+  border: 1px solid var(--dhr-border-strong);
   border-radius: 8px;
-  color: #ddd;
+  color: var(--dhr-text-bright);
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
@@ -163,10 +163,10 @@
   width: 100%;
   text-align: left;
   padding: 9px 12px;
-  background: #15151e;
-  border: 1px solid #222230;
+  background: var(--dhr-surface);
+  border: 1px solid var(--dhr-border);
   border-radius: 8px;
-  color: #ccc;
+  color: var(--dhr-text-secondary);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -177,10 +177,10 @@
 }
 
 .dhr-qa-question--open {
-  background: #1a1a24;
+  background: var(--dhr-surface-raised);
   border-color: var(--cat-color-40);
   border-radius: 8px 8px 0 0;
-  color: #fff;
+  color: var(--dhr-text-heading);
   font-weight: 600;
 }
 
@@ -200,13 +200,13 @@
 /* ── Q&A answer ── */
 .dhr-qa-answer {
   padding: 10px 12px;
-  background: #1a1a24;
+  background: var(--dhr-surface-raised);
   border: 1px solid var(--cat-color-40);
   border-top: none;
   border-radius: 0 0 8px 8px;
   font-size: 12.5px;
   line-height: 1.6;
-  color: #c0c0cc;
+  color: var(--dhr-text-secondary);
   white-space: pre-line;
 }
 
@@ -214,9 +214,9 @@
 .dhr-category-pill {
   padding: 4px 10px;
   border-radius: 20px;
-  border: 1px solid var(--pill-border, #444);
+  border: 1px solid var(--pill-border, var(--dhr-border-strong));
   background: var(--pill-bg, transparent);
-  color: #999;
+  color: var(--dhr-text-muted);
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
@@ -224,7 +224,7 @@
 }
 
 .dhr-category-pill--active {
-  color: #ddd;
+  color: var(--dhr-text-bright);
 }
 
 /* ── Action pill ── */
@@ -232,7 +232,7 @@
   padding: 4px 10px;
   border-radius: 20px;
   border: 1px solid;
-  color: #999;
+  color: var(--dhr-text-muted);
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
@@ -248,7 +248,7 @@
 .dhr-action-pill--rules.dhr-action-pill--flash {
   border-color: rgba(196, 150, 60, 0.5);
   background: rgba(196, 150, 60, 0.2);
-  color: #ccc;
+  color: var(--dhr-text-secondary);
 }
 
 .dhr-action-pill--cards {
@@ -259,7 +259,7 @@
 .dhr-action-pill--cards.dhr-action-pill--flash {
   border-color: rgba(150, 120, 195, 0.5);
   background: rgba(150, 120, 195, 0.2);
-  color: #ccc;
+  color: var(--dhr-text-secondary);
 }
 
 .dhr-action-pill--clear {
@@ -270,13 +270,43 @@
 .dhr-action-pill--clear.dhr-action-pill--flash {
   border-color: rgba(85, 170, 150, 0.5);
   background: rgba(85, 170, 150, 0.2);
-  color: #ccc;
+  color: var(--dhr-text-secondary);
+}
+
+/* ── Theme toggle ── */
+.dhr-theme-toggle {
+  padding: 3px 6px;
+  border-radius: 20px;
+  border: 1px solid var(--dhr-border-strong);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 2px;
+  margin-top: 4px;
+  transition: all 0.15s ease;
+}
+
+[data-theme="light"] .dhr-theme-toggle {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dhr-theme-icon,
+.dhr-theme-icon--active {
+  transition: opacity 0.15s ease;
+}
+
+.dhr-theme-icon {
+  opacity: 0.25;
+}
+
+.dhr-theme-icon--active {
+  opacity: 0.85;
 }
 
 /* ── No results ── */
 .dhr-no-results {
   text-align: center;
-  color: #555;
+  color: var(--dhr-text-dim);
   padding: 40px;
   font-size: 14px;
 }
@@ -285,7 +315,28 @@
 .dhr-footer {
   text-align: center;
   font-size: 10px;
-  color: #444;
+  color: var(--dhr-text-ghost);
   margin-top: 20px;
   padding-bottom: 16px;
+}
+
+/* ── Light mode accent adjustments ── */
+[data-theme="light"] .dhr-category__label {
+  color: color-mix(in srgb, var(--cat-color) 65%, black);
+}
+
+[data-theme="light"] .dhr-qa-icon {
+  color: color-mix(in srgb, var(--cat-color) 65%, black);
+}
+
+[data-theme="light"] .dhr-quick-select-label {
+  color: #c4646e;
+}
+
+[data-theme="light"] .dhr-pill-group-label--rules {
+  color: #b47d09;
+}
+
+[data-theme="light"] .dhr-pill-group-label--cards {
+  color: #6d3ec8;
 }
