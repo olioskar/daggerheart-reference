@@ -1552,7 +1552,7 @@ export default function DaggerheartRef() {
     }))
     .filter(c => c.questions.length > 0);
 
-  const orderedFiltered = ALL_CATEGORIES
+  const orderedFiltered = (filter === null ? ALL_CATEGORIES : [...filter])
     .map(cat => filtered.find(f => f.category === cat))
     .filter(Boolean);
 
