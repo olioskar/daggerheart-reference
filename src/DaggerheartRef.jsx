@@ -1480,6 +1480,12 @@ const CARDS_HERITAGE = [
 
 const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 
+const ACTION_PILLS = [
+  { label: "Rules & Mechanics", rgb: "196, 150, 60" },
+  { label: "Cards, Classes & Heritage", rgb: "150, 120, 195" },
+  { label: "Clear Filters", rgb: "85, 170, 150" },
+];
+
 const PILL_TINTS = {
   "🎲 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
   "🧭 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
@@ -1683,22 +1689,44 @@ export default function DaggerheartRef() {
     );
   };
 
-  const selectAllButton = (
-    <button
-      onClick={() => { setFilter(null); setSearch(""); }}
-      style={{
-        padding: "4px 10px",
-        borderRadius: 20,
-        border: "1px solid",
-        borderColor: filter === null && !search ? "#fff" : "#444",
-        background: filter === null && !search ? "#fff" : "transparent",
-        color: filter === null && !search ? "#0f0f13" : "#999",
-        fontSize: 11,
-        fontWeight: 600,
-        cursor: "pointer"
-      }}
-    >Show All</button>
-  );
+  const [flashAction, setFlashAction] = useState(null);
+
+  const handleActionClick = (label) => {
+    if (label === "Rules & Mechanics") {
+      setFilter(new Set(RULES_MECHANICS));
+    } else if (label === "Cards, Classes & Heritage") {
+      setFilter(new Set(CARDS_HERITAGE));
+    } else {
+      setFilter(null);
+    }
+    setSearch("");
+    setFlashAction(label);
+    setTimeout(() => setFlashAction(null), 150);
+  };
+
+  const renderActionPills = () =>
+    ACTION_PILLS.map(({ label, rgb }) => {
+      const isFlashing = flashAction === label;
+      return (
+        <button
+          key={label}
+          onClick={() => handleActionClick(label)}
+          style={{
+            padding: "4px 10px",
+            borderRadius: 20,
+            border: "1px solid",
+            borderColor: `rgba(${rgb}, ${isFlashing ? 0.5 : 0.25})`,
+            background: `rgba(${rgb}, ${isFlashing ? 0.2 : 0.08})`,
+            color: isFlashing ? "#ccc" : "#999",
+            fontSize: 11,
+            fontWeight: 600,
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+            transition: "all 0.15s ease"
+          }}
+        >{label}</button>
+      );
+    });
 
   return (
     <div style={{
@@ -1748,29 +1776,57 @@ export default function DaggerheartRef() {
         />
       </div>
 
-      <div style={{ maxWidth: 540, margin: "0 auto 14px" }}>
-        {selectAllButton}
-      </div>
-
-      <div style={{
-        maxWidth: isTwoColumn ? 885 : undefined,
-        margin: isTwoColumn ? "0 auto 18px" : "0 0 18px"
-      }}>
-        {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
-        {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
-      </div>
-
       {isTwoColumn ? (
-        <div style={{
-          columns: 2,
-          columnGap: 40,
-          maxWidth: 1120,
-          margin: "0 auto"
-        }}>
-          {renderCategories(orderedFiltered)}
-        </div>
+        <>
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            marginBottom: 18
+          }}>
+            <div style={{ flex: "1 1 0", maxWidth: 708, minWidth: 0 }}>
+              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+            </div>
+            <div style={{
+              flexShrink: 0,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: 6,
+              marginLeft: 24
+            }}>
+              {renderActionPills()}
+            </div>
+          </div>
+
+          <div style={{
+            columns: 2,
+            columnGap: 40,
+            maxWidth: 1120,
+            margin: "0 auto"
+          }}>
+            {renderCategories(orderedFiltered)}
+          </div>
+        </>
       ) : (
-        renderCategories(orderedFiltered)
+        <>
+          <div style={{
+            display: "flex",
+            gap: 5,
+            justifyContent: "center",
+            marginBottom: 14
+          }}>
+            {renderActionPills()}
+          </div>
+
+          <div style={{ marginBottom: 18 }}>
+            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
+          </div>
+
+          {renderCategories(orderedFiltered)}
+        </>
       )}
 
       {filtered.length === 0 && (
