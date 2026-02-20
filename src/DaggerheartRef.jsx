@@ -1770,16 +1770,9 @@ export default function DaggerheartRef() {
         </>
       ) : (
         <>
-          <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 5,
-            marginBottom: 18
-          }}>
-            {ALL_CATEGORIES
-              .map(cat => data.find(d => d.category === cat))
-              .filter(Boolean)
-              .map(renderPill)}
+          <div style={{ marginBottom: 18 }}>
+            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "#f59e0b")}
+            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "#8b5cf6")}
           </div>
           {renderCategories(orderedFiltered)}
         </>
