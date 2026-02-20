@@ -1569,7 +1569,8 @@ export default function DaggerheartRef() {
 
   const renderPill = (c) => {
     const label = c.category.replace(/^[^\w]*/, "").trim();
-    const isActive = filter !== null && filter.has(c.category);
+    const isActive = (filter !== null && filter.has(c.category)) ||
+      (search && filtered.some(f => f.category === c.category));
     const tint = PILL_TINTS[c.category];
     return (
       <button
