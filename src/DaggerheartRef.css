@@ -25,7 +25,13 @@
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   padding: 20px calc(50vw - 50% + 16px);
-  background: var(--dhr-surface-raised);
+  background: linear-gradient(
+    to right,
+    transparent calc(50% - 320px),
+    var(--dhr-surface-raised) calc(50% - 270px),
+    var(--dhr-surface-raised) calc(50% + 270px),
+    transparent calc(50% + 320px)
+  );
 }
 
 .dhr-header__title {
@@ -332,7 +338,7 @@
   margin-right: calc(-50vw + 50%);
   padding: calc(var(--footer-gap) + 16px) calc(50vw - 50% + 16px) 20px;
   background: linear-gradient(transparent var(--footer-gap), var(--dhr-surface-raised) var(--footer-gap));
-  text-align: right;
+  text-align: center;
   font-size: 10.5px;
   color: var(--dhr-text-dim);
   line-height: 1.7;

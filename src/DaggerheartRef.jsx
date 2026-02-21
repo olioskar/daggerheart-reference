@@ -1764,11 +1764,7 @@ export default function DaggerheartRef() {
           the <a href="https://darringtonpress.com/license/" target="_blank" rel="noopener noreferrer">Darrington Press Community Gaming License (DPCGL)</a>.
         </p>
         <p>
-          More information at <a href="https://www.daggerheart.com" target="_blank" rel="noopener noreferrer">daggerheart.com</a>.
-        </p>
-        <p>
-          Content has been edited, condensed, and reorganized for quick reference.
-          No previous modifications by others.
+          More information at <a href="https://www.daggerheart.com" target="_blank" rel="noopener noreferrer">daggerheart.com</a>. Content has been edited, condensed, and reorganized for quick reference. No previous modifications by others.
         </p>
       </div>
     </div>
