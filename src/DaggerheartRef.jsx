@@ -9,7 +9,8 @@ const data = [
     questions: [
       {
         q: "Step 0 — Concept & Relationships",
-        a: `Before picking ancestry, class, or any mechanics — define who your character is narratively.\n\nConcept: Write a short character concept. This is the hook others will connect to. It can be a sentence ("a wandering musician searching for a lost song") or a short paragraph. Keep it grounded in who the person is, not what they can do mechanically.\n\nStarting Point: As a group, decide where you all met or where the story begins. What do you know about that place? Who lives there? This shapes your shared context and may influence ancestry or class choices later.\n\nRelationships: Decide how your characters know each other. Who do you trust? Who do you clash with? What NPCs matter to you — a lover, a rival, an old mentor? Work with the GM to tie your character into the setting and the other PCs. This is where tension and drama come from, and it's the engine that makes Daggerheart's narrative-first design shine.\n\nDo this before touching mechanics. Once concept, starting point, and relationships are set, ancestry and class choices tend to fall into place naturally — and your character becomes more than a stat block.`
+        a: `Before picking ancestry, class, or any mechanics — define who your character is narratively.\n\nConcept: Write a short character concept. This is the hook others will connect to. It can be a sentence ("a disgraced soldier trying to disappear") or a short paragraph. Focus on who the person is, not what they can do mechanically.\n\nStarting Point: As a group, decide where you all met or where the story begins. What do you know about that place? Who lives there? This shapes your shared context and may influence ancestry or class choices later.\n\nRelationships: Decide how your characters know each other. Who do you trust? Who do you clash with? What NPCs matter to you — a lover, a rival, an old mentor? Work with the GM to tie your character into the setting and the other PCs. These connections fuel the narrative and give the GM material to build on.\n\nDo this before touching mechanics. Once concept, starting point, and relationships are set, ancestry and class choices tend to fall into place naturally — and your character becomes more than a collection of features.`
+`
       },
       {
         q: "Step 1 — Choose a Class & Subclass",
@@ -1318,7 +1319,8 @@ const data = [
     questions: [
       {
         q: "C.A.T.S. — Session 0 Framework",
-        a: `Before anyone builds a character, align the table on four things:\n\nConcept: The campaign pitch. What is this story about? Can be one sentence. ("A group of old friends reunite in a frontier town as war looms.")\n\nAim: What should the campaign feel like in practice? Weekly deep-lore sessions, or casual monster-slaying hangouts? Set expectations for commitment, pace, and depth.\n\nTone: Agree on the emotional register. Serious with comic relief? Lighthearted throughout? Dark and gritty? Everyone at the table should be on the same page — mismatched tone kills campaigns.\n\nSubject: What topics does the story touch or avoid? Some subjects may be sensitive for certain players. Establish boundaries openly and respect them. This isn't optional — it's what keeps the table safe and fun.\n\nRun C.A.T.S. before character creation. The answers directly shape what kinds of characters make sense, and give you (the GM) a foundation to prep around.`
+        a: `Before anyone builds a character, align the table on four things:\n\nConcept: What is this story about? One or two sentences that frame the campaign. ("A group of old friends reunite in a frontier town as war looms.")\n\nAim: What does the table want out of this game? Long-running saga with deep investment, or lighter sessions focused on action? Set expectations for commitment and pacing early.\n\nTone: Agree on the emotional register. Serious with comic relief? Lighthearted throughout? Dark and gritty? Everyone needs to be aligned — tone mismatches are one of the fastest ways to derail a table.\n\nSubject: What does the story include or explicitly avoid? Discuss boundaries openly. Not every topic works for every group, and respecting that keeps the game enjoyable for everyone.\n\nRun C.A.T.S. before character creation. The answers directly shape what kinds of characters make sense, and give you (the GM) a foundation to prep around.`
+
       },
       {
         q: "GM principles — your north star",
@@ -1684,10 +1686,10 @@ export default function DaggerheartRef() {
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
       <div className="dhr-header">
         <h1 className="dhr-header__title">
-          Daggerheart Quick Reference
+          SRD Quick Reference
         </h1>
         <p className="dhr-header__subtitle">
-          {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand
+          Daggerheart™ Compatible · {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand
         </p>
       </div>
 
@@ -1706,7 +1708,7 @@ export default function DaggerheartRef() {
           className={`dhr-clear-pill${hasActiveFilter ? " dhr-clear-pill--active" : ""}`}
           onClick={handleClearFilters}
         >
-          {hasActiveFilter ? "Clear Filters" : "All Topics"}
+          {hasActiveFilter ? "Clear Filters" : "All Topics Visible"}
         </button>
         {themeToggle}
       </div>
@@ -1731,7 +1733,18 @@ export default function DaggerheartRef() {
       )}
 
       <div className="dhr-footer">
-        Daggerheart © 2025 Critical Role LLC · Fan reference tool
+        <p>
+          This product includes materials from the Daggerheart System Reference
+          Document 1.0, &copy; Critical Role, LLC, under the terms of
+          the <a href="https://darringtonpress.com/license/" target="_blank" rel="noopener noreferrer">Darrington Press Community Gaming License (DPCGL)</a>.
+        </p>
+        <p>
+          More information at <a href="https://www.daggerheart.com" target="_blank" rel="noopener noreferrer">daggerheart.com</a>.
+        </p>
+        <p>
+          Content has been edited, condensed, and reorganized for quick reference.
+          No previous modifications by others.
+        </p>
       </div>
     </div>
   );

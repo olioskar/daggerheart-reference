@@ -325,6 +325,17 @@
   color: var(--dhr-text-ghost);
   margin-top: 20px;
   padding-bottom: 16px;
+  line-height: 1.6;
+}
+
+.dhr-footer p {
+  margin: 4px 0;
+}
+
+.dhr-footer a {
+  color: var(--dhr-text-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* ── Light mode accent adjustments ── */
