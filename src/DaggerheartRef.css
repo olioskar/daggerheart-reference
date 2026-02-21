@@ -1,9 +1,11 @@
 /* ── Root ── */
 .dhr-root {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  width: 100%;
   max-width: 540px;
   margin: 0 auto;
   padding: 20px 16px;
+  box-sizing: border-box;
   background: transparent;
   min-height: 100vh;
   color: var(--dhr-text);
