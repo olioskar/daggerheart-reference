@@ -1650,14 +1650,12 @@ export default function DaggerheartRef() {
   function renderPillGroup(columnOrder, groupLabel, labelCls) {
     const cats = columnOrder.map(cat => data.find(d => d.category === cat)).filter(Boolean);
     return (
-      <div>
-        <div className={`dhr-pill-group-label ${labelCls}`}>
+      <>
+        <span className={`dhr-pill-group-label ${labelCls}`}>
           {groupLabel}
-        </div>
-        <div className="dhr-pill-group-pills">
-          {cats.map(renderPill)}
-        </div>
-      </div>
+        </span>
+        {cats.map(renderPill)}
+      </>
     );
   }
 
@@ -1709,42 +1707,22 @@ export default function DaggerheartRef() {
         />
       </div>
 
+      <div className="dhr-action-pills-row">
+        {renderActionPills()}
+        {themeToggle}
+      </div>
+
+      <div className="dhr-pill-groups-wrapper">
+        {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "dhr-pill-group-label--rules")}
+        {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "dhr-pill-group-label--cards")}
+      </div>
+
       {isTwoColumn ? (
-        <>
-          <div className="dhr-pills-row">
-            <div className="dhr-pills-col-left">
-              {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "dhr-pill-group-label--rules")}
-              {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "dhr-pill-group-label--cards")}
-            </div>
-            <div className="dhr-pills-col-right">
-              <div className="dhr-quick-select-label">
-                Quick Select
-              </div>
-              <div className="dhr-action-pills-stack">
-                {renderActionPills()}
-                {themeToggle}
-              </div>
-            </div>
-          </div>
-
-          <div className="dhr-columns-grid">
-            {renderCategories(orderedFiltered)}
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="dhr-action-pills-row">
-            {renderActionPills()}
-            {themeToggle}
-          </div>
-
-          <div className="dhr-pill-groups-wrapper">
-            {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "dhr-pill-group-label--rules")}
-            {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "dhr-pill-group-label--cards")}
-          </div>
-
+        <div className="dhr-columns-grid">
           {renderCategories(orderedFiltered)}
-        </>
+        </div>
+      ) : (
+        renderCategories(orderedFiltered)
       )}
 
       {filtered.length === 0 && (

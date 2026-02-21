@@ -36,8 +36,6 @@
   gap: 8px;
 }
 
-
-
 .dhr-header__subtitle {
   font-size: 12px;
   color: var(--dhr-text-faint);
@@ -62,44 +60,7 @@
   box-sizing: border-box;
 }
 
-/* ── Pills row (two-column) ── */
-.dhr-pills-row {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  max-width: 1120px;
-  margin: 0 auto 18px;
-}
-
-.dhr-pills-col-left {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.dhr-pills-col-right {
-  flex-shrink: 0;
-}
-
-/* ── Quick Select label (two-column) ── */
-.dhr-quick-select-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #e88a9a;
-  margin-bottom: 8px;
-  text-align: right;
-}
-
-/* ── Action pills stack (two-column) ── */
-.dhr-action-pills-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
-
-/* ── Action pills row (single-column) ── */
+/* ── Action pills row ── */
 .dhr-action-pills-row {
   display: flex;
   flex-wrap: wrap;
@@ -108,35 +69,36 @@
   margin-bottom: 14px;
 }
 
-/* ── Pill groups wrapper (single-column) ── */
+/* ── Pill groups wrapper ── */
 .dhr-pill-groups-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 18px;
-  text-align: center;
 }
 
 /* ── Pill group ── */
 .dhr-pill-group-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+  white-space: nowrap;
 }
 
 .dhr-pill-group-label--rules {
   color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.12);
 }
 
 .dhr-pill-group-label--cards {
   color: #8b5cf6;
-}
-
-.dhr-pill-group-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 18px;
-  justify-content: center;
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.12);
 }
 
 /* ── Columns grid ── */
@@ -145,6 +107,7 @@
   column-gap: 40px;
   max-width: 1120px;
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 /* ── Category ── */
@@ -338,10 +301,6 @@
 
 [data-theme="light"] .dhr-qa-icon {
   color: color-mix(in srgb, var(--cat-color) 65%, black);
-}
-
-[data-theme="light"] .dhr-quick-select-label {
-  color: #c4646e;
 }
 
 [data-theme="light"] .dhr-pill-group-label--rules {
