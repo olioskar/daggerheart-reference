@@ -8,6 +8,10 @@ const data = [
     color: "#f59e0b",
     questions: [
       {
+        q: "Step 0 — Concept & Relationships",
+        a: `Before picking ancestry, class, or any mechanics — define who your character is narratively.\n\nConcept: Write a short character concept. This is the hook others will connect to. It can be a sentence ("a wandering musician searching for a lost song") or a short paragraph. Keep it grounded in who the person is, not what they can do mechanically.\n\nStarting Point: As a group, decide where you all met or where the story begins. What do you know about that place? Who lives there? This shapes your shared context and may influence ancestry or class choices later.\n\nRelationships: Decide how your characters know each other. Who do you trust? Who do you clash with? What NPCs matter to you — a lover, a rival, an old mentor? Work with the GM to tie your character into the setting and the other PCs. This is where tension and drama come from, and it's the engine that makes Daggerheart's narrative-first design shine.\n\nDo this before touching mechanics. Once concept, starting point, and relationships are set, ancestry and class choices tend to fall into place naturally — and your character becomes more than a stat block.`
+      },
+      {
         q: "Step 1 — Choose a Class & Subclass",
         a: `Pick one of 9 classes (Bard, Druid, Guardian, Ranger, Rogue, Seraph, Sorcerer, Warrior, Wizard). Each class gives you access to 2 domains, a class feature, a Hope feature (costs 3 Hope), starting Evasion, starting HP, and a class item.\n\nThen pick one of your class's 2 subclasses. This gives you a Spellcast trait and a Foundation feature right away (Specialization and Mastery come later via leveling).`
       },
@@ -1313,6 +1317,18 @@ const data = [
     color: "#b45309",
     questions: [
       {
+        q: "C.A.T.S. — Session 0 Framework",
+        a: `Before anyone builds a character, align the table on four things:\n\nConcept: The campaign pitch. What is this story about? Can be one sentence. ("A group of old friends reunite in a frontier town as war looms.")\n\nAim: What should the campaign feel like in practice? Weekly deep-lore sessions, or casual monster-slaying hangouts? Set expectations for commitment, pace, and depth.\n\nTone: Agree on the emotional register. Serious with comic relief? Lighthearted throughout? Dark and gritty? Everyone at the table should be on the same page — mismatched tone kills campaigns.\n\nSubject: What topics does the story touch or avoid? Some subjects may be sensitive for certain players. Establish boundaries openly and respect them. This isn't optional — it's what keeps the table safe and fun.\n\nRun C.A.T.S. before character creation. The answers directly shape what kinds of characters make sense, and give you (the GM) a foundation to prep around.`
+      },
+      {
+        q: "GM principles — your north star",
+        a: `1. Begin and end with the fiction — mechanics serve the story, not the other way around.\n2. Collaborate, especially during conflict — you and the players are on the same team.\n3. Fill the world with life, wonder, and danger.\n4. Ask questions and incorporate the answers — let players build the world too.\n5. Give every roll impact — only roll when it matters.\n6. Play to find out what happens — be surprised by the story.\n7. Hold on gently — don't be afraid to abandon or alter what came before.\n\nPractices: cultivate curiosity, earn trust, keep things moving, cut to the action, help players use the system, tell them what they'd know, reframe rather than reject, work in moments and montages.`
+      },
+      {
+        q: "Session structure — a practical flow",
+        a: `1. Recap last session (let players do this — it shows you what they remember and care about).\n2. Set the scene — describe the situation, establish what's at stake.\n3. Play through scenes using the core loop: describe → questions → action → resolve → repeat.\n4. When combat starts, shift to spotlight-based play. Track Fear, use countdowns, keep adversary turns snappy.\n5. After combat or major scenes, offer a rest if it makes narrative sense.\n6. End the session on a cliffhanger, a revelation, or a moment of calm — whatever lands best.\n\nBetween sessions: note unresolved threads, think about what NPCs are doing off-screen, prep 1–2 situations (not scripts).`
+      },
+      {
         q: "Your core tools as GM",
         a: `You have three main levers:\n\n1. The Spotlight — you decide who acts and when. Point it at PCs, adversaries, or the environment.\n2. Fear — your currency. Gain it from player rolls and rests, spend it to make moves, activate features, and escalate tension.\n3. GM Moves — your actions in the fiction. Triggered by player rolls, but you choose what happens. Moves range from soft (new information, foreshadowing) to hard (direct consequences, damage).\n\nYou do NOT roll Duality Dice. You roll a single d20 (the GM's Die) for adversary attacks and occasional adversary action rolls.`
       },
@@ -1395,14 +1411,6 @@ const data = [
       {
         q: "Pitfalls to avoid",
         a: `• Undermining heroes: If a roll fails, blame the environment or enemy — not the PC's competence.\n• Always dictating the trait: Let players decide how they approach a challenge. If they want to use Presence to intimidate a lock open, hear them out.\n• Letting scenes drag: If energy is flagging, cut away. End scenes when the interesting part is done.\n• Singular solutions: Don't plan for one right answer. Reward creative approaches.\n• Overplanning: Prep situations, not scripts. If players surprise you, take a break to think.\n• Hoarding Fear: Spend it. The players will always generate more.\n• Hiding obvious info: Tell PCs what their characters would know. Don't gate basic scene details behind rolls.`
-      },
-      {
-        q: "GM principles — your north star",
-        a: `1. Begin and end with the fiction — mechanics serve the story, not the other way around.\n2. Collaborate, especially during conflict — you and the players are on the same team.\n3. Fill the world with life, wonder, and danger.\n4. Ask questions and incorporate the answers — let players build the world too.\n5. Give every roll impact — only roll when it matters.\n6. Play to find out what happens — be surprised by the story.\n7. Hold on gently — don't be afraid to abandon or alter what came before.\n\nPractices: cultivate curiosity, earn trust, keep things moving, cut to the action, help players use the system, tell them what they'd know, reframe rather than reject, work in moments and montages.`
-      },
-      {
-        q: "Session structure — a practical flow",
-        a: `1. Recap last session (let players do this — it shows you what they remember and care about).\n2. Set the scene — describe the situation, establish what's at stake.\n3. Play through scenes using the core loop: describe → questions → action → resolve → repeat.\n4. When combat starts, shift to spotlight-based play. Track Fear, use countdowns, keep adversary turns snappy.\n5. After combat or major scenes, offer a rest if it makes narrative sense.\n6. End the session on a cliffhanger, a revelation, or a moment of calm — whatever lands best.\n\nBetween sessions: note unresolved threads, think about what NPCs are doing off-screen, prep 1–2 situations (not scripts).`
       },
       {
         q: "Rest management — your Fear refill",
@@ -1684,7 +1692,7 @@ export default function DaggerheartRef() {
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
       <div className="dhr-header">
         <h1 className="dhr-header__title">
-          <Sword className="dhr-title-sword" /> Daggerheart Quick Reference <Sword className="dhr-title-sword" />
+          <Sword className="dhr-title-sword dhr-title-sword--left" /> Daggerheart Quick Reference <Sword className="dhr-title-sword dhr-title-sword--right" />
         </h1>
         <p className="dhr-header__subtitle">
           {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand

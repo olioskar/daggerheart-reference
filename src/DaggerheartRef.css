@@ -40,6 +40,15 @@
   opacity: 0.5;
 }
 
+.dhr-title-sword--left {
+  color: #8b5cf6;
+}
+
+.dhr-title-sword--right {
+  color: #f59e0b;
+  transform: scaleX(-1);
+}
+
 .dhr-header__subtitle {
   font-size: 12px;
   color: var(--dhr-text-faint);
@@ -349,4 +358,12 @@
 
 [data-theme="light"] .dhr-pill-group-label--cards {
   color: #6d3ec8;
+}
+
+[data-theme="light"] .dhr-title-sword--left {
+  color: #6d3ec8;
+}
+
+[data-theme="light"] .dhr-title-sword--right {
+  color: #b47d09;
 }
