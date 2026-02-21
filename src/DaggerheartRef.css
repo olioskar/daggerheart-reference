@@ -87,18 +87,30 @@
   border-radius: 20px;
   border: 1px solid;
   white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .dhr-pill-group-label--rules {
   color: #f59e0b;
-  border-color: rgba(245, 158, 11, 0.35);
-  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.dhr-pill-group-label--rules.dhr-pill-group-label--active {
+  border-color: rgba(245, 158, 11, 0.7);
+  background: rgba(245, 158, 11, 0.3);
 }
 
 .dhr-pill-group-label--cards {
-  color: #8b5cf6;
-  border-color: rgba(139, 92, 246, 0.35);
-  background: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.15);
+}
+
+.dhr-pill-group-label--cards.dhr-pill-group-label--active {
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(167, 139, 250, 0.3);
 }
 
 /* ── Columns grid ── */
@@ -214,28 +226,6 @@
   transition: all 0.15s ease;
 }
 
-.dhr-action-pill--rules {
-  border-color: rgba(196, 150, 60, 0.25);
-  background: rgba(196, 150, 60, 0.08);
-}
-
-.dhr-action-pill--rules.dhr-action-pill--flash {
-  border-color: rgba(196, 150, 60, 0.5);
-  background: rgba(196, 150, 60, 0.2);
-  color: var(--dhr-text-secondary);
-}
-
-.dhr-action-pill--cards {
-  border-color: rgba(150, 120, 195, 0.25);
-  background: rgba(150, 120, 195, 0.08);
-}
-
-.dhr-action-pill--cards.dhr-action-pill--flash {
-  border-color: rgba(150, 120, 195, 0.5);
-  background: rgba(150, 120, 195, 0.2);
-  color: var(--dhr-text-secondary);
-}
-
 .dhr-action-pill--clear {
   border-color: rgba(85, 170, 150, 0.25);
   background: rgba(85, 170, 150, 0.08);
@@ -308,7 +298,7 @@
 }
 
 [data-theme="light"] .dhr-pill-group-label--cards {
-  color: #6d3ec8;
+  color: #7c3aed;
 }
 
 

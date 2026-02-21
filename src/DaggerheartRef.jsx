@@ -1493,8 +1493,6 @@ const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 const TOTAL_QUESTIONS = data.reduce((sum, c) => sum + c.questions.length, 0);
 
 const ACTION_PILLS = [
-  { label: "Rules & Mechanics", cls: "dhr-action-pill--rules", categories: RULES_MECHANICS },
-  { label: "Cards, Classes & Heritage", cls: "dhr-action-pill--cards", categories: CARDS_HERITAGE },
   { label: "Clear Filters", cls: "dhr-action-pill--clear", categories: null },
 ];
 
@@ -1647,13 +1645,22 @@ export default function DaggerheartRef() {
     ));
   }
 
+  function handleGroupLabelClick(categories) {
+    setFilter(new Set(categories));
+    setSearch("");
+  }
+
   function renderPillGroup(columnOrder, groupLabel, labelCls) {
     const cats = columnOrder.map(cat => data.find(d => d.category === cat)).filter(Boolean);
+    const isActive = filter !== null && columnOrder.every(c => filter.has(c));
     return (
       <>
-        <span className={`dhr-pill-group-label ${labelCls}`}>
+        <button
+          className={`dhr-pill-group-label ${labelCls}${isActive ? " dhr-pill-group-label--active" : ""}`}
+          onClick={() => handleGroupLabelClick(columnOrder)}
+        >
           {groupLabel}
-        </span>
+        </button>
         {cats.map(renderPill)}
       </>
     );
