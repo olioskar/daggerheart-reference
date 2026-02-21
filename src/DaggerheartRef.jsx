@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, ChevronRight } from "lucide-react";
 import "./DaggerheartRef.css";
 
 const data = [
@@ -1492,10 +1492,6 @@ const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 
 const TOTAL_QUESTIONS = data.reduce((sum, c) => sum + c.questions.length, 0);
 
-const ACTION_PILLS = [
-  { label: "Clear Filters", cls: "dhr-action-pill--clear", categories: null },
-];
-
 const PILL_TINTS = {
   "📜 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
   "📝 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
@@ -1527,7 +1523,6 @@ export default function DaggerheartRef() {
   const [openQ, setOpenQ] = useState(null);
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
-  const [flashAction, setFlashAction] = useState(null);
   const [isTwoColumn, setIsTwoColumn] = useState(() =>
     window.matchMedia("(min-width: 800px)").matches
   );
@@ -1588,18 +1583,21 @@ export default function DaggerheartRef() {
   }
 
   function renderPill(c) {
-    const label = c.category.replace(/^[^\w]*/, "").trim();
+    const label = c.category.replace(/^[^\w]*/, "").replace(/\s*\(\d+\)$/, "").trim();
     const isActive = (filter !== null && filter.has(c.category)) ||
       (search && filtered.some(f => f.category === c.category));
+    const isRulesGroup = RULES_MECHANICS.includes(c.category);
+    const groupBorder = isRulesGroup
+      ? "rgba(245, 158, 11, 0.3)"
+      : "rgba(167, 139, 250, 0.3)";
     const tint = PILL_TINTS[c.category];
 
-    let pillBorder = "#444";
+    let pillBorder = groupBorder;
     let pillBg = "transparent";
     if (isActive) {
       pillBorder = c.color + "77";
       pillBg = c.color + "33";
     } else if (tint) {
-      pillBorder = tint.border;
       pillBg = tint.bg;
     }
 
@@ -1660,36 +1658,25 @@ export default function DaggerheartRef() {
           onClick={() => handleGroupLabelClick(columnOrder)}
         >
           {groupLabel}
+          <ChevronRight size={12} className="dhr-pill-group-label__icon" />
+          <ChevronRight size={12} className={`dhr-pill-group-label__icon dhr-pill-group-label__icon--second${isActive ? " dhr-pill-group-label__icon--visible" : ""}`} />
         </button>
         {cats.map(renderPill)}
       </>
     );
   }
 
-  function handleActionClick(pill) {
-    setFilter(pill.categories ? new Set(pill.categories) : null);
-    setSearch("");
-    setFlashAction(pill.label);
-    setTimeout(() => setFlashAction(null), 150);
-  }
+  const hasActiveFilter = filter !== null || search !== "";
 
-  function renderActionPills() {
-    return ACTION_PILLS.map((pill) => {
-      const isFlashing = flashAction === pill.label;
-      return (
-        <button
-          key={pill.label}
-          onClick={() => handleActionClick(pill)}
-          className={`dhr-action-pill ${pill.cls}${isFlashing ? " dhr-action-pill--flash" : ""}`}
-        >{pill.label}</button>
-      );
-    });
+  function handleClearFilters() {
+    setFilter(null);
+    setSearch("");
   }
 
   const themeToggle = (
     <button onClick={() => setTheme(t => t === "dark" ? "light" : "dark")} className="dhr-theme-toggle">
-      <Moon size={12} className={theme === "dark" ? "dhr-theme-icon--active" : "dhr-theme-icon"} />
-      <Sun size={12} className={theme === "light" ? "dhr-theme-icon--active" : "dhr-theme-icon"} />
+      <Moon size={13} className={`dhr-theme-icon-moon${theme === "dark" ? " dhr-theme-icon--active" : ""}`} />
+      <Sun size={13} className={`dhr-theme-icon-sun${theme === "light" ? " dhr-theme-icon--active" : ""}`} />
     </button>
   );
 
@@ -1715,7 +1702,12 @@ export default function DaggerheartRef() {
       </div>
 
       <div className="dhr-action-pills-row">
-        {renderActionPills()}
+        <button
+          className={`dhr-clear-pill${hasActiveFilter ? " dhr-clear-pill--active" : ""}`}
+          onClick={handleClearFilters}
+        >
+          {hasActiveFilter ? "Clear Filters" : "All Topics"}
+        </button>
         {themeToggle}
       </div>
 
