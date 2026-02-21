@@ -109,6 +109,7 @@
 /* ── Pill groups wrapper (single-column) ── */
 .dhr-pill-groups-wrapper {
   margin-bottom: 18px;
+  text-align: center;
 }
 
 /* ── Pill group ── */
@@ -133,6 +134,7 @@
   flex-wrap: wrap;
   gap: 5px;
   margin-bottom: 18px;
+  justify-content: center;
 }
 
 /* ── Columns grid ── */
