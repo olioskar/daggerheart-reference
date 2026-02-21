@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun, Sword } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import "./DaggerheartRef.css";
 
 const data = [
@@ -1692,7 +1692,7 @@ export default function DaggerheartRef() {
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
       <div className="dhr-header">
         <h1 className="dhr-header__title">
-          <Sword className="dhr-title-sword dhr-title-sword--left" /> Daggerheart Quick Reference <Sword className="dhr-title-sword dhr-title-sword--right" />
+          Daggerheart Quick Reference
         </h1>
         <p className="dhr-header__subtitle">
           {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand
