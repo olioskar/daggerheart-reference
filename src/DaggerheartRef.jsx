@@ -10,7 +10,6 @@ const data = [
       {
         q: "Step 0 — Concept & Relationships",
         a: `Before picking ancestry, class, or any mechanics — define who your character is narratively.\n\nConcept: Write a short character concept. This is the hook others will connect to. It can be a sentence ("a disgraced soldier trying to disappear") or a short paragraph. Focus on who the person is, not what they can do mechanically.\n\nStarting Point: As a group, decide where you all met or where the story begins. What do you know about that place? Who lives there? This shapes your shared context and may influence ancestry or class choices later.\n\nRelationships: Decide how your characters know each other. Who do you trust? Who do you clash with? What NPCs matter to you — a lover, a rival, an old mentor? Work with the GM to tie your character into the setting and the other PCs. These connections fuel the narrative and give the GM material to build on.\n\nDo this before touching mechanics. Once concept, starting point, and relationships are set, ancestry and class choices tend to fall into place naturally — and your character becomes more than a collection of features.`
-`
       },
       {
         q: "Step 1 — Choose a Class & Subclass",
