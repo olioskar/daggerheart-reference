@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Sword } from "lucide-react";
 import "./DaggerheartRef.css";
 
 const data = [
   {
-    category: "🧭 Character Creation",
+    category: "📝 Character Creation",
     color: "#f59e0b",
     questions: [
       {
@@ -46,7 +46,7 @@ const data = [
     ]
   },
   {
-    category: "⚔️ Classes & Subclasses",
+    category: "⚜️ Classes & Subclasses",
     color: "#dc2626",
     questions: [
       {
@@ -318,7 +318,7 @@ const data = [
     ]
   },
   {
-    category: "🛡️ Conditions & Effects",
+    category: "⚡ Conditions & Effects",
     color: "#059669",
     questions: [
       {
@@ -414,7 +414,7 @@ const data = [
     ]
   },
   {
-    category: "🗡️ Equipment & Loot",
+    category: "💰 Equipment & Loot",
     color: "#78716c",
     questions: [
       {
@@ -440,7 +440,7 @@ const data = [
     ]
   },
   {
-    category: "✨ Spellcasting",
+    category: "🪄 Spellcasting",
     color: "#7e22ce",
     questions: [
       {
@@ -556,7 +556,7 @@ const data = [
     ]
   },
   {
-    category: "⚔️ Blade Domain Cards",
+    category: "🗡️ Blade Domain Cards",
     color: "#dc2626",
     questions: [
       {
@@ -744,7 +744,7 @@ const data = [
     ]
   },
   {
-    category: "📖 Codex Domain Cards",
+    category: "📚 Codex Domain Cards",
     color: "#2563eb",
     questions: [
       {
@@ -838,7 +838,7 @@ const data = [
     ]
   },
   {
-    category: "🎭 Grace Domain Cards",
+    category: "💃 Grace Domain Cards",
     color: "#ec4899",
     questions: [
       {
@@ -932,7 +932,7 @@ const data = [
     ]
   },
   {
-    category: "🌑 Midnight Domain Cards",
+    category: "🌘 Midnight Domain Cards",
     color: "#4338ca",
     questions: [
       {
@@ -1309,7 +1309,7 @@ const data = [
   },
 
   {
-    category: "🎲 Running the Game (GM)",
+    category: "📜 Running the Game (GM)",
     color: "#b45309",
     questions: [
       {
@@ -1415,7 +1415,7 @@ const data = [
     ]
   },
   {
-    category: "❓ Edge Cases & Tips",
+    category: "📌 Edge Cases & Tips",
     color: "#64748b",
     questions: [
       {
@@ -1451,30 +1451,30 @@ const data = [
 ];
 
 const RULES_MECHANICS = [
-  "🎲 Running the Game (GM)",
-  "🧭 Character Creation",
+  "📜 Running the Game (GM)",
+  "📝 Character Creation",
   "🎲 Core Rolls",
   "⚔️ Combat & Damage",
-  "🛡️ Conditions & Effects",
+  "⚡ Conditions & Effects",
   "📦 Resources",
   "🏕️ Downtime & Death",
   "🎭 Spotlight & GM",
   "📈 Leveling & Advancement",
-  "🗡️ Equipment & Loot",
-  "✨ Spellcasting",
-  "❓ Edge Cases & Tips",
+  "💰 Equipment & Loot",
+  "🪄 Spellcasting",
+  "📌 Edge Cases & Tips",
 ];
 
 const CARDS_HERITAGE = [
-  "⚔️ Classes & Subclasses",
+  "⚜️ Classes & Subclasses",
   "🧬 Ancestries (18)",
   "🏘️ Communities (9)",
   "🔮 Arcana Domain Cards",
-  "⚔️ Blade Domain Cards",
+  "🗡️ Blade Domain Cards",
   "🦴 Bone Domain Cards",
-  "📖 Codex Domain Cards",
-  "🎭 Grace Domain Cards",
-  "🌑 Midnight Domain Cards",
+  "📚 Codex Domain Cards",
+  "💃 Grace Domain Cards",
+  "🌘 Midnight Domain Cards",
   "🌿 Sage Domain Cards",
   "✨ Splendor Domain Cards",
   "🛡️ Valor Domain Cards",
@@ -1491,28 +1491,28 @@ const ACTION_PILLS = [
 ];
 
 const PILL_TINTS = {
-  "🎲 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
-  "🧭 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
+  "📜 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
+  "📝 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
   "🎲 Core Rolls": { bg: "rgba(56, 189, 248, 0.08)", border: "rgba(56, 189, 248, 0.25)" },
   "⚔️ Combat & Damage": { bg: "rgba(249, 115, 22, 0.08)", border: "rgba(249, 115, 22, 0.25)" },
-  "🛡️ Conditions & Effects": { bg: "rgba(132, 204, 22, 0.08)", border: "rgba(132, 204, 22, 0.25)" },
+  "⚡ Conditions & Effects": { bg: "rgba(132, 204, 22, 0.08)", border: "rgba(132, 204, 22, 0.25)" },
   "📦 Resources": { bg: "rgba(34, 211, 238, 0.08)", border: "rgba(34, 211, 238, 0.25)" },
   "🏕️ Downtime & Death": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
   "🎭 Spotlight & GM": { bg: "rgba(244, 63, 94, 0.08)", border: "rgba(244, 63, 94, 0.25)" },
   "📈 Leveling & Advancement": { bg: "rgba(192, 38, 211, 0.08)", border: "rgba(192, 38, 211, 0.25)" },
-  "🗡️ Equipment & Loot": { bg: "rgba(168, 162, 158, 0.08)", border: "rgba(168, 162, 158, 0.25)" },
-  "✨ Spellcasting": { bg: "rgba(167, 139, 250, 0.08)", border: "rgba(167, 139, 250, 0.25)" },
-  "❓ Edge Cases & Tips": { bg: "rgba(148, 163, 184, 0.08)", border: "rgba(148, 163, 184, 0.25)" },
+  "💰 Equipment & Loot": { bg: "rgba(168, 162, 158, 0.08)", border: "rgba(168, 162, 158, 0.25)" },
+  "🪄 Spellcasting": { bg: "rgba(167, 139, 250, 0.08)", border: "rgba(167, 139, 250, 0.25)" },
+  "📌 Edge Cases & Tips": { bg: "rgba(148, 163, 184, 0.08)", border: "rgba(148, 163, 184, 0.25)" },
   "🔮 Arcana Domain Cards": { bg: "rgba(124, 58, 237, 0.08)", border: "rgba(124, 58, 237, 0.25)" },
-  "⚔️ Blade Domain Cards": { bg: "rgba(220, 38, 38, 0.08)", border: "rgba(220, 38, 38, 0.25)" },
+  "🗡️ Blade Domain Cards": { bg: "rgba(220, 38, 38, 0.08)", border: "rgba(220, 38, 38, 0.25)" },
   "🦴 Bone Domain Cards": { bg: "rgba(120, 113, 108, 0.08)", border: "rgba(120, 113, 108, 0.25)" },
-  "📖 Codex Domain Cards": { bg: "rgba(37, 99, 235, 0.08)", border: "rgba(37, 99, 235, 0.25)" },
-  "🎭 Grace Domain Cards": { bg: "rgba(236, 72, 153, 0.08)", border: "rgba(236, 72, 153, 0.25)" },
-  "🌑 Midnight Domain Cards": { bg: "rgba(67, 56, 202, 0.08)", border: "rgba(67, 56, 202, 0.25)" },
+  "📚 Codex Domain Cards": { bg: "rgba(37, 99, 235, 0.08)", border: "rgba(37, 99, 235, 0.25)" },
+  "💃 Grace Domain Cards": { bg: "rgba(236, 72, 153, 0.08)", border: "rgba(236, 72, 153, 0.25)" },
+  "🌘 Midnight Domain Cards": { bg: "rgba(67, 56, 202, 0.08)", border: "rgba(67, 56, 202, 0.25)" },
   "🌿 Sage Domain Cards": { bg: "rgba(22, 163, 106, 0.08)", border: "rgba(22, 163, 106, 0.25)" },
   "✨ Splendor Domain Cards": { bg: "rgba(234, 179, 8, 0.08)", border: "rgba(234, 179, 8, 0.25)" },
   "🛡️ Valor Domain Cards": { bg: "rgba(185, 28, 28, 0.08)", border: "rgba(185, 28, 28, 0.25)" },
-  "⚔️ Classes & Subclasses": { bg: "rgba(220, 38, 38, 0.07)", border: "rgba(220, 38, 38, 0.22)" },
+  "⚜️ Classes & Subclasses": { bg: "rgba(220, 38, 38, 0.07)", border: "rgba(220, 38, 38, 0.22)" },
   "🧬 Ancestries (18)": { bg: "rgba(139, 92, 246, 0.07)", border: "rgba(139, 92, 246, 0.22)" },
   "🏘️ Communities (9)": { bg: "rgba(13, 148, 136, 0.07)", border: "rgba(13, 148, 136, 0.22)" },
 };
@@ -1684,7 +1684,7 @@ export default function DaggerheartRef() {
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
       <div className="dhr-header">
         <h1 className="dhr-header__title">
-          ⚔️ Daggerheart Quick Reference
+          <Sword className="dhr-title-sword" /> Daggerheart Quick Reference <Sword className="dhr-title-sword" />
         </h1>
         <p className="dhr-header__subtitle">
           {TOTAL_QUESTIONS} entries · SRD 1.0 (May 2025) · Tap to expand

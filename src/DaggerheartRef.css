@@ -28,6 +28,16 @@
   margin: 0;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dhr-title-sword {
+  width: 18px;
+  height: 18px;
+  opacity: 0.5;
 }
 
 .dhr-header__subtitle {
