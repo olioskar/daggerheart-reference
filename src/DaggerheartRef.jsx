@@ -1,34 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Moon, Sun, ChevronRight } from "lucide-react";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
 import { matchesSearch } from "./utils/search";
+import { useTheme } from "./hooks/useTheme";
+import { useResponsiveColumns } from "./hooks/useResponsiveColumns";
 
 export default function DaggerheartRef() {
   const [openQ, setOpenQ] = useState(null);
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
-  const [isTwoColumn, setIsTwoColumn] = useState(() =>
-    window.matchMedia("(min-width: 800px)").matches
-  );
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem("dhr-theme") || "dark";
-    document.documentElement.dataset.theme = saved;
-    return saved;
-  });
-
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 800px)");
-    const handler = (e) => setIsTwoColumn(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("dhr-theme", theme);
-  }, [theme]);
+  const { theme, toggleTheme } = useTheme();
+  const isTwoColumn = useResponsiveColumns(800);
 
   function toggle(key) {
     setOpenQ(openQ === key ? null : key);
@@ -154,7 +138,7 @@ export default function DaggerheartRef() {
   }
 
   const themeToggle = (
-    <button onClick={() => setTheme(t => t === "dark" ? "light" : "dark")} className="dhr-theme-toggle">
+    <button onClick={toggleTheme} className="dhr-theme-toggle">
       <Moon size={13} className={`dhr-theme-icon-moon${theme === "dark" ? " dhr-theme-icon--active" : ""}`} />
       <Sun size={13} className={`dhr-theme-icon-sun${theme === "light" ? " dhr-theme-icon--active" : ""}`} />
     </button>
