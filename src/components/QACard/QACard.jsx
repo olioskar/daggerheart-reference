@@ -5,6 +5,7 @@ export function QACard({ question, answer, open, onToggle }) {
     <div>
       <button
         onClick={onToggle}
+        aria-expanded={open}
         className={`${styles.question}${open ? ` ${styles.open}` : ""}`}
       >
         <span>{question}</span>
