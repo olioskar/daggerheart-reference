@@ -7,7 +7,7 @@
   border-radius: 8px;
   color: var(--dhr-text-secondary);
   font-family: var(--dhr-font-display);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
   cursor: pointer;
@@ -53,7 +53,7 @@
   border: 1px solid transparent;
   border-top: none;
   border-radius: 0 0 8px 8px;
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.6;
   color: var(--dhr-text-secondary);
   white-space: pre-line;

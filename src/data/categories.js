@@ -1,7 +1,7 @@
 const data = [
   {
     category: "📝 Character Creation",
-    color: "#f59e0b",
+    color: "#b45309",
     questions: [
       {
         q: "Step 0 — Concept & Relationships",
@@ -47,7 +47,7 @@ const data = [
   },
   {
     category: "⚜️ Classes & Subclasses",
-    color: "#dc2626",
+    color: "#a31d1d",
     questions: [
       {
         q: "Bard — Codex & Grace",
@@ -93,7 +93,7 @@ const data = [
   },
   {
     category: "🧬 Ancestries (18)",
-    color: "#8b5cf6",
+    color: "#7347c9",
     questions: [
       {
         q: "Clank (mechanical being)",
@@ -217,7 +217,7 @@ const data = [
   },
   {
     category: "🎲 Core Rolls",
-    color: "#7c3aed",
+    color: "#6d28d9",
     questions: [
       {
         q: "How do action rolls work?",
@@ -255,7 +255,7 @@ const data = [
   },
   {
     category: "⚔️ Combat & Damage",
-    color: "#e11d48",
+    color: "#9f1239",
     questions: [
       {
         q: "How does attacking work?",
@@ -297,7 +297,7 @@ const data = [
   },
   {
     category: "📦 Resources",
-    color: "#2563eb",
+    color: "#2d6a8a",
     questions: [
       {
         q: "Hope — gaining & spending",
@@ -341,7 +341,7 @@ const data = [
   },
   {
     category: "🏕️ Downtime & Death",
-    color: "#d97706",
+    color: "#854d0e",
     questions: [
       {
         q: "Short rest (~1 hour)",
@@ -389,7 +389,7 @@ const data = [
   },
   {
     category: "📈 Leveling & Advancement",
-    color: "#4f46e5",
+    color: "#5b5299",
     questions: [
       {
         q: "Level structure & tiers",
@@ -463,7 +463,7 @@ const data = [
   },
   {
     category: "🔮 Arcana Domain Cards",
-    color: "#7c3aed",
+    color: "#6e45a8",
     questions: [
       {
         q: "Arcana Domain — overview",
@@ -557,7 +557,7 @@ const data = [
   },
   {
     category: "🗡️ Blade Domain Cards",
-    color: "#dc2626",
+    color: "#a31d1d",
     questions: [
       {
         q: "Blade Domain — overview",
@@ -745,7 +745,7 @@ const data = [
   },
   {
     category: "📚 Codex Domain Cards",
-    color: "#2563eb",
+    color: "#2d5a8e",
     questions: [
       {
         q: "Codex Domain — overview",
@@ -839,7 +839,7 @@ const data = [
   },
   {
     category: "💃 Grace Domain Cards",
-    color: "#ec4899",
+    color: "#b5366f",
     questions: [
       {
         q: "Grace Domain — overview",
@@ -933,7 +933,7 @@ const data = [
   },
   {
     category: "🌘 Midnight Domain Cards",
-    color: "#4338ca",
+    color: "#5e6e8f",
     questions: [
       {
         q: "Midnight Domain — overview",
@@ -1121,7 +1121,7 @@ const data = [
   },
   {
     category: "✨ Splendor Domain Cards",
-    color: "#eab308",
+    color: "#a88a0c",
     questions: [
       {
         q: "Splendor Domain — overview",
@@ -1488,29 +1488,29 @@ const CARDS_HERITAGE = [
 const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 
 const PILL_TINTS = {
-  "📜 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
-  "📝 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
-  "🎲 Core Rolls": { bg: "rgba(56, 189, 248, 0.08)", border: "rgba(56, 189, 248, 0.25)" },
-  "⚔️ Combat & Damage": { bg: "rgba(249, 115, 22, 0.08)", border: "rgba(249, 115, 22, 0.25)" },
-  "⚡ Conditions & Effects": { bg: "rgba(132, 204, 22, 0.08)", border: "rgba(132, 204, 22, 0.25)" },
-  "📦 Resources": { bg: "rgba(34, 211, 238, 0.08)", border: "rgba(34, 211, 238, 0.25)" },
-  "🏕️ Downtime & Death": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
-  "🎭 Spotlight & GM": { bg: "rgba(244, 63, 94, 0.08)", border: "rgba(244, 63, 94, 0.25)" },
-  "📈 Leveling & Advancement": { bg: "rgba(192, 38, 211, 0.08)", border: "rgba(192, 38, 211, 0.25)" },
-  "💰 Equipment & Loot": { bg: "rgba(168, 162, 158, 0.08)", border: "rgba(168, 162, 158, 0.25)" },
-  "🪄 Spellcasting": { bg: "rgba(167, 139, 250, 0.08)", border: "rgba(167, 139, 250, 0.25)" },
-  "📌 Edge Cases & Tips": { bg: "rgba(148, 163, 184, 0.08)", border: "rgba(148, 163, 184, 0.25)" },
-  "🔮 Arcana Domain Cards": { bg: "rgba(124, 58, 237, 0.08)", border: "rgba(124, 58, 237, 0.25)" },
-  "🗡️ Blade Domain Cards": { bg: "rgba(220, 38, 38, 0.08)", border: "rgba(220, 38, 38, 0.25)" },
+  "📜 Running the Game (GM)": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
+  "📝 Character Creation": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
+  "🎲 Core Rolls": { bg: "rgba(109, 40, 217, 0.08)", border: "rgba(109, 40, 217, 0.25)" },
+  "⚔️ Combat & Damage": { bg: "rgba(159, 18, 57, 0.08)", border: "rgba(159, 18, 57, 0.25)" },
+  "⚡ Conditions & Effects": { bg: "rgba(5, 150, 105, 0.08)", border: "rgba(5, 150, 105, 0.25)" },
+  "📦 Resources": { bg: "rgba(45, 106, 138, 0.08)", border: "rgba(45, 106, 138, 0.25)" },
+  "🏕️ Downtime & Death": { bg: "rgba(133, 77, 14, 0.08)", border: "rgba(133, 77, 14, 0.25)" },
+  "🎭 Spotlight & GM": { bg: "rgba(190, 24, 93, 0.08)", border: "rgba(190, 24, 93, 0.25)" },
+  "📈 Leveling & Advancement": { bg: "rgba(91, 82, 153, 0.08)", border: "rgba(91, 82, 153, 0.25)" },
+  "💰 Equipment & Loot": { bg: "rgba(120, 113, 108, 0.08)", border: "rgba(120, 113, 108, 0.25)" },
+  "🪄 Spellcasting": { bg: "rgba(126, 34, 206, 0.08)", border: "rgba(126, 34, 206, 0.25)" },
+  "📌 Edge Cases & Tips": { bg: "rgba(100, 116, 139, 0.08)", border: "rgba(100, 116, 139, 0.25)" },
+  "🔮 Arcana Domain Cards": { bg: "rgba(110, 69, 168, 0.08)", border: "rgba(110, 69, 168, 0.25)" },
+  "🗡️ Blade Domain Cards": { bg: "rgba(163, 29, 29, 0.08)", border: "rgba(163, 29, 29, 0.25)" },
   "🦴 Bone Domain Cards": { bg: "rgba(120, 113, 108, 0.08)", border: "rgba(120, 113, 108, 0.25)" },
-  "📚 Codex Domain Cards": { bg: "rgba(37, 99, 235, 0.08)", border: "rgba(37, 99, 235, 0.25)" },
-  "💃 Grace Domain Cards": { bg: "rgba(236, 72, 153, 0.08)", border: "rgba(236, 72, 153, 0.25)" },
-  "🌘 Midnight Domain Cards": { bg: "rgba(67, 56, 202, 0.08)", border: "rgba(67, 56, 202, 0.25)" },
-  "🌿 Sage Domain Cards": { bg: "rgba(22, 163, 106, 0.08)", border: "rgba(22, 163, 106, 0.25)" },
-  "✨ Splendor Domain Cards": { bg: "rgba(234, 179, 8, 0.08)", border: "rgba(234, 179, 8, 0.25)" },
+  "📚 Codex Domain Cards": { bg: "rgba(45, 90, 142, 0.08)", border: "rgba(45, 90, 142, 0.25)" },
+  "💃 Grace Domain Cards": { bg: "rgba(181, 54, 111, 0.08)", border: "rgba(181, 54, 111, 0.25)" },
+  "🌘 Midnight Domain Cards": { bg: "rgba(94, 110, 143, 0.08)", border: "rgba(94, 110, 143, 0.25)" },
+  "🌿 Sage Domain Cards": { bg: "rgba(22, 163, 74, 0.08)", border: "rgba(22, 163, 74, 0.25)" },
+  "✨ Splendor Domain Cards": { bg: "rgba(168, 138, 12, 0.08)", border: "rgba(168, 138, 12, 0.25)" },
   "🛡️ Valor Domain Cards": { bg: "rgba(185, 28, 28, 0.08)", border: "rgba(185, 28, 28, 0.25)" },
-  "⚜️ Classes & Subclasses": { bg: "rgba(220, 38, 38, 0.07)", border: "rgba(220, 38, 38, 0.22)" },
-  "🧬 Ancestries (18)": { bg: "rgba(139, 92, 246, 0.07)", border: "rgba(139, 92, 246, 0.22)" },
+  "⚜️ Classes & Subclasses": { bg: "rgba(163, 29, 29, 0.07)", border: "rgba(163, 29, 29, 0.22)" },
+  "🧬 Ancestries (18)": { bg: "rgba(115, 71, 201, 0.07)", border: "rgba(115, 71, 201, 0.22)" },
   "🏘️ Communities (9)": { bg: "rgba(13, 148, 136, 0.07)", border: "rgba(13, 148, 136, 0.22)" },
 };
 
