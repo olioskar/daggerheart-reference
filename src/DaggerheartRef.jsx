@@ -5,6 +5,7 @@ import { PillGroup } from "./components/PillGroup";
 import { CategoryGroup } from "./components/CategoryGroup";
 import { TwoColumnLayout } from "./components/TwoColumnLayout";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -138,7 +139,7 @@ export default function DaggerheartRef() {
         </div>
       )}
 
-      <div className="dhr-footer">
+      <Footer>
         <p>
           This product includes materials from the Daggerheart System Reference
           Document 1.0, &copy; Critical Role, LLC, under the terms of
@@ -147,7 +148,7 @@ export default function DaggerheartRef() {
         <p>
           More information at <a href="https://www.daggerheart.com" target="_blank" rel="noopener noreferrer">daggerheart.com</a>. Content has been edited, condensed, and reorganized for quick reference. No previous modifications by others.
         </p>
-      </div>
+      </Footer>
     </div>
   );
 }

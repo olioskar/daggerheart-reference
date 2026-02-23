@@ -1,0 +1,23 @@
+.footer {
+  --footer-gap: 36px;
+  position: relative;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: calc(var(--footer-gap) + 16px) calc(50vw - 50% + 16px) 20px;
+  background: linear-gradient(transparent var(--footer-gap), var(--dhr-surface-raised) var(--footer-gap));
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--dhr-text-dim);
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: var(--dhr-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
