@@ -1487,8 +1487,6 @@ const CARDS_HERITAGE = [
 
 const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 
-const TOTAL_QUESTIONS = data.reduce((sum, c) => sum + c.questions.length, 0);
-
 const PILL_TINTS = {
   "📜 Running the Game (GM)": { bg: "rgba(217, 119, 6, 0.08)", border: "rgba(217, 119, 6, 0.25)" },
   "📝 Character Creation": { bg: "rgba(6, 182, 212, 0.08)", border: "rgba(6, 182, 212, 0.25)" },
@@ -1516,4 +1514,4 @@ const PILL_TINTS = {
   "🏘️ Communities (9)": { bg: "rgba(13, 148, 136, 0.07)", border: "rgba(13, 148, 136, 0.22)" },
 };
 
-export { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, TOTAL_QUESTIONS, PILL_TINTS };
+export { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS };

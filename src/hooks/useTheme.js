@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 
 export function useTheme() {
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem("dhr-theme") || "dark";
-    document.documentElement.dataset.theme = saved;
-    return saved;
-  });
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("dhr-theme") || "dark"
+  );
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
