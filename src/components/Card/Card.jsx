@@ -1,6 +1,6 @@
-import styles from "./QACard.module.css";
+import styles from "./Card.module.css";
 
-export function QACard({ question, answer, open, onToggle }) {
+export function Card({ question, answer, open, onToggle }) {
   return (
     <div>
       <button

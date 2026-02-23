@@ -1,4 +1,4 @@
-import { QACard } from "../QACard";
+import { Card } from "../Card";
 import styles from "./CategoryGroup.module.css";
 
 export function CategoryGroup({ category, openQs, onToggle }) {
@@ -11,7 +11,7 @@ export function CategoryGroup({ category, openQs, onToggle }) {
         {category.questions.map((item, i) => {
           const key = `${category.category}-${i}`;
           return (
-            <QACard
+            <Card
               key={key}
               question={item.q}
               answer={item.a}
