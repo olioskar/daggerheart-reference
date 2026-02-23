@@ -3,6 +3,7 @@ import { ThemeToggle } from "./components/ThemeToggle";
 import { SearchInput } from "./components/SearchInput";
 import { PillGroup } from "./components/PillGroup";
 import { CategoryGroup } from "./components/CategoryGroup";
+import { TwoColumnLayout } from "./components/TwoColumnLayout";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -126,14 +127,9 @@ export default function DaggerheartRef() {
         (() => {
           const [col1, col2] = distributeColumns(orderedFiltered);
           return (
-            <div className="dhr-columns-grid">
-              <div className="dhr-columns-grid__col">
-                {renderCategories(col1)}
-              </div>
-              <div className="dhr-columns-grid__col">
-                {renderCategories(col2)}
-              </div>
-            </div>
+            <TwoColumnLayout
+              columns={[renderCategories(col1), renderCategories(col2)]}
+            />
           );
         })()
       ) : (
