@@ -2,24 +2,8 @@ import { useState, useEffect } from "react";
 import { Moon, Sun, ChevronRight } from "lucide-react";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS } from "./data/categories";
-
-function distributeColumns(categories) {
-  if (categories.length === 0) return [[], []];
-  const col1 = [categories[0]];
-  const col2 = categories.length > 1 ? [categories[1]] : [];
-  let count1 = col1[0].questions.length;
-  let count2 = col2.length > 0 ? col2[0].questions.length : 0;
-  for (let i = 2; i < categories.length; i++) {
-    if (count1 <= count2) {
-      col1.push(categories[i]);
-      count1 += categories[i].questions.length;
-    } else {
-      col2.push(categories[i]);
-      count2 += categories[i].questions.length;
-    }
-  }
-  return [col1, col2];
-}
+import { distributeColumns } from "./utils/distributeColumns";
+import { matchesSearch } from "./utils/search";
 
 export default function DaggerheartRef() {
   const [openQ, setOpenQ] = useState(null);
@@ -52,17 +36,11 @@ export default function DaggerheartRef() {
 
   const searchLower = search.toLowerCase();
 
-  function matchesSearch(item) {
-    if (!search) return true;
-    return item.q.toLowerCase().includes(searchLower) ||
-      item.a.toLowerCase().includes(searchLower);
-  }
-
   const filtered = data
     .filter(c => filter === null || filter.has(c.category))
     .map(c => {
       if (search && c.category.toLowerCase().includes(searchLower)) return c;
-      return { ...c, questions: c.questions.filter(matchesSearch) };
+      return { ...c, questions: c.questions.filter(item => matchesSearch(item, searchLower)) };
     })
     .filter(c => c.questions.length > 0);
 
