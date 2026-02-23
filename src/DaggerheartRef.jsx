@@ -10,14 +10,19 @@ import { useResponsiveColumns } from "./hooks/useResponsiveColumns";
 const categoryMap = new Map(data.map(d => [d.category, d]));
 
 export default function DaggerheartRef() {
-  const [openQ, setOpenQ] = useState(null);
+  const [openQs, setOpenQs] = useState(new Set());
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
   const { theme, toggleTheme } = useTheme();
   const isTwoColumn = useResponsiveColumns(800);
 
   function toggle(key) {
-    setOpenQ(openQ === key ? null : key);
+    setOpenQs(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
   }
 
   const searchLower = search.toLowerCase();
@@ -110,12 +115,12 @@ export default function DaggerheartRef() {
 
       {isTwoColumn ? (
         <TwoColumnLayout columns={[
-          col1.map(cat => <CategoryGroup key={cat.category} category={cat} openQ={openQ} onToggle={toggle} />),
-          col2.map(cat => <CategoryGroup key={cat.category} category={cat} openQ={openQ} onToggle={toggle} />),
+          col1.map(cat => <CategoryGroup key={cat.category} category={cat} openQs={openQs} onToggle={toggle} />),
+          col2.map(cat => <CategoryGroup key={cat.category} category={cat} openQs={openQs} onToggle={toggle} />),
         ]} />
       ) : (
         orderedFiltered.map(cat => (
-          <CategoryGroup key={cat.category} category={cat} openQ={openQ} onToggle={toggle} />
+          <CategoryGroup key={cat.category} category={cat} openQs={openQs} onToggle={toggle} />
         ))
       )}
 

@@ -11,11 +11,11 @@ export function QACard({ question, answer, open, onToggle }) {
         <span>{question}</span>
         <span className={`${styles.icon}${open ? ` ${styles.iconOpen}` : ""}`}>+</span>
       </button>
-      {open && (
+      <div className={`${styles.answerWrap}${open ? ` ${styles.answerWrapOpen}` : ""}`}>
         <div className={styles.answer}>
           {answer}
         </div>
-      )}
+      </div>
     </div>
   );
 }

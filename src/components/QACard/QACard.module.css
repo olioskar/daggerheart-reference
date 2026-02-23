@@ -2,7 +2,7 @@
   width: 100%;
   text-align: left;
   padding: 9px 12px;
-  background: var(--dhr-surface);
+  background: color-mix(in srgb, var(--cat-color) 4%, var(--dhr-surface));
   border: 1px solid var(--dhr-border);
   border-radius: 8px;
   color: var(--dhr-text-secondary);
@@ -16,7 +16,7 @@
 }
 
 .open {
-  background: var(--dhr-surface-raised);
+  background: color-mix(in srgb, var(--cat-color) 6%, var(--dhr-surface-raised));
   border-color: var(--cat-color-40);
   border-radius: 8px 8px 0 0;
   color: var(--dhr-text-heading);
@@ -35,14 +35,30 @@
   transform: rotate(45deg);
 }
 
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s ease;
+}
+
+.answerWrapOpen {
+  grid-template-rows: 1fr;
+}
+
 .answer {
-  padding: 10px 12px;
+  overflow: hidden;
+  padding: 0 12px;
   background: var(--dhr-surface-raised);
-  border: 1px solid var(--cat-color-40);
+  border: 1px solid transparent;
   border-top: none;
   border-radius: 0 0 8px 8px;
   font-size: 12.5px;
   line-height: 1.6;
   color: var(--dhr-text-secondary);
   white-space: pre-line;
+}
+
+.answerWrapOpen .answer {
+  padding: 10px 12px;
+  border-color: var(--cat-color-40);
 }

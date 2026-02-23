@@ -1,5 +1,8 @@
 .category {
   margin-bottom: 18px;
+  background: color-mix(in srgb, var(--cat-color) 3%, transparent);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .label {
