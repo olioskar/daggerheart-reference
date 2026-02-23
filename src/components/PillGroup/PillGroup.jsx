@@ -30,8 +30,8 @@ export function PillGroup({ categories, groupLabel, variant, activeCategories, o
         let pillBorder = groupBorder;
         let pillBg = "transparent";
         if (isActive) {
-          pillBorder = c.color + "77";
-          pillBg = c.color + "33";
+          pillBorder = `color-mix(in srgb, ${c.color} 47%, transparent)`;
+          pillBg = `color-mix(in srgb, ${c.color} 20%, transparent)`;
         } else if (tint) {
           pillBg = tint.bg;
         }

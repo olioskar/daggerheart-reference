@@ -3,7 +3,7 @@ import styles from "./CategoryGroup.module.css";
 
 export function CategoryGroup({ category, openQ, onToggle }) {
   return (
-    <div className={styles.category} style={{ "--cat-color": category.color, "--cat-color-40": category.color + "66" }}>
+    <div className={styles.category} style={{ "--cat-color": category.color, "--cat-color-40": `color-mix(in srgb, ${category.color} 40%, transparent)` }}>
       <div className={styles.label}>
         {category.category}
       </div>
