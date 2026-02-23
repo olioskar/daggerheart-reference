@@ -7,6 +7,8 @@ import { matchesSearch } from "./utils/search";
 import { useTheme } from "./hooks/useTheme";
 import { useResponsiveColumns } from "./hooks/useResponsiveColumns";
 
+const categoryMap = new Map(data.map(d => [d.category, d]));
+
 export default function DaggerheartRef() {
   const [openQ, setOpenQ] = useState(null);
   const [filter, setFilter] = useState(null);
@@ -31,6 +33,11 @@ export default function DaggerheartRef() {
   const orderedFiltered = (filter === null ? ALL_CATEGORIES : [...filter])
     .map(cat => filtered.find(f => f.category === cat))
     .filter(Boolean);
+
+  const activeCategories = new Set([
+    ...(filter ? [...filter] : []),
+    ...(search ? filtered.map(f => f.category) : []),
+  ]);
 
   function handlePillClick(category) {
     const active = filter ?? new Set();
@@ -93,22 +100,18 @@ export default function DaggerheartRef() {
 
       <div className={styles.pillGroups}>
         <PillGroup
-          categories={RULES_MECHANICS.map(cat => data.find(d => d.category === cat)).filter(Boolean)}
+          categories={RULES_MECHANICS.map(name => categoryMap.get(name)).filter(Boolean)}
           groupLabel="Rules & Mechanics"
           variant="rules"
-          filter={filter}
-          search={search}
-          filtered={filtered}
+          activeCategories={activeCategories}
           onPillClick={handlePillClick}
           onGroupClick={() => handleGroupLabelClick(RULES_MECHANICS)}
         />
         <PillGroup
-          categories={CARDS_HERITAGE.map(cat => data.find(d => d.category === cat)).filter(Boolean)}
+          categories={CARDS_HERITAGE.map(name => categoryMap.get(name)).filter(Boolean)}
           groupLabel="Cards, Classes & Heritage"
           variant="cards"
-          filter={filter}
-          search={search}
-          filtered={filtered}
+          activeCategories={activeCategories}
           onPillClick={handlePillClick}
           onGroupClick={() => handleGroupLabelClick(CARDS_HERITAGE)}
         />

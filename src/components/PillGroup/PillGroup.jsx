@@ -3,8 +3,8 @@ import { Pill } from "../Pill";
 import { PILL_TINTS } from "../../data/categories";
 import styles from "./PillGroup.module.css";
 
-export function PillGroup({ categories, groupLabel, variant, filter, search, filtered, onPillClick, onGroupClick }) {
-  const isGroupActive = filter !== null && categories.every(c => filter.has(c.category));
+export function PillGroup({ categories, groupLabel, variant, activeCategories, onPillClick, onGroupClick }) {
+  const isGroupActive = categories.every(c => activeCategories.has(c.category));
 
   const variantClass = variant === "rules" ? styles.rules : styles.cards;
 
@@ -20,8 +20,7 @@ export function PillGroup({ categories, groupLabel, variant, filter, search, fil
       </button>
       {categories.map(c => {
         const label = c.category.replace(/^[^\w]*/, "").replace(/\s*\(\d+\)$/, "").trim();
-        const isActive = (filter !== null && filter.has(c.category)) ||
-          (search && filtered.some(f => f.category === c.category));
+        const isActive = activeCategories.has(c.category);
         const isRulesGroup = variant === "rules";
         const groupBorder = isRulesGroup
           ? "rgba(245, 158, 11, 0.3)"
