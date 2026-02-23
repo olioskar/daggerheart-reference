@@ -1,0 +1,46 @@
+.toggle {
+  padding: 4px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--dhr-border-strong);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s ease;
+}
+
+:global([data-theme="light"]) .toggle {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.iconMoon,
+.iconSun {
+  transition: opacity 0.15s ease;
+}
+
+.iconMoon {
+  color: #a78bfa;
+  opacity: 0.3;
+}
+
+.iconSun {
+  color: #f59e0b;
+  opacity: 0.3;
+}
+
+.iconMoon.active { opacity: 0.9; }
+.iconSun.active { opacity: 0.9; }
+
+:global([data-theme="light"]) .iconMoon {
+  color: #7c3aed;
+  opacity: 0.25;
+}
+
+:global([data-theme="light"]) .iconSun {
+  color: #d97706;
+}
+
+:global([data-theme="light"]) .iconSun.active {
+  opacity: 0.9;
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Moon, Sun, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { ThemeToggle } from "./components/ThemeToggle";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -137,12 +138,7 @@ export default function DaggerheartRef() {
     setSearch("");
   }
 
-  const themeToggle = (
-    <button onClick={toggleTheme} className="dhr-theme-toggle">
-      <Moon size={13} className={`dhr-theme-icon-moon${theme === "dark" ? " dhr-theme-icon--active" : ""}`} />
-      <Sun size={13} className={`dhr-theme-icon-sun${theme === "light" ? " dhr-theme-icon--active" : ""}`} />
-    </button>
-  );
+  const themeToggle = <ThemeToggle theme={theme} onToggle={toggleTheme} />;
 
   return (
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
