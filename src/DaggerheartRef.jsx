@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { SearchInput } from "./components/SearchInput";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -149,15 +150,11 @@ export default function DaggerheartRef() {
         </p>
       </div>
 
-      <div className="dhr-search-wrapper">
-        <input
-          type="text"
-          placeholder="Search rules, classes, ancestries..."
-          value={search}
-          onChange={e => { setSearch(e.target.value); setFilter(null); }}
-          className="dhr-search-input"
-        />
-      </div>
+      <SearchInput
+        value={search}
+        onChange={e => { setSearch(e.target.value); setFilter(null); }}
+        placeholder="Search rules, classes, ancestries..."
+      />
 
       <div className="dhr-action-pills-row">
         <button

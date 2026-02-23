@@ -1,0 +1,16 @@
+.wrapper {
+  max-width: 540px;
+  margin: 0 auto 12px;
+}
+
+.input {
+  width: 100%;
+  padding: 9px 14px;
+  background: var(--dhr-surface-raised);
+  border: 1px solid var(--dhr-border-strong);
+  border-radius: 8px;
+  color: var(--dhr-text-bright);
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
