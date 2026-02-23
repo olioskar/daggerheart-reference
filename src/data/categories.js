@@ -1487,31 +1487,4 @@ const CARDS_HERITAGE = [
 
 const ALL_CATEGORIES = [...RULES_MECHANICS, ...CARDS_HERITAGE];
 
-const PILL_TINTS = {
-  "📜 Running the Game (GM)": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
-  "📝 Character Creation": { bg: "rgba(180, 83, 9, 0.08)", border: "rgba(180, 83, 9, 0.25)" },
-  "🎲 Core Rolls": { bg: "rgba(109, 40, 217, 0.08)", border: "rgba(109, 40, 217, 0.25)" },
-  "⚔️ Combat & Damage": { bg: "rgba(159, 18, 57, 0.08)", border: "rgba(159, 18, 57, 0.25)" },
-  "⚡ Conditions & Effects": { bg: "rgba(5, 150, 105, 0.08)", border: "rgba(5, 150, 105, 0.25)" },
-  "📦 Resources": { bg: "rgba(45, 106, 138, 0.08)", border: "rgba(45, 106, 138, 0.25)" },
-  "🏕️ Downtime & Death": { bg: "rgba(133, 77, 14, 0.08)", border: "rgba(133, 77, 14, 0.25)" },
-  "🎭 Spotlight & GM": { bg: "rgba(190, 24, 93, 0.08)", border: "rgba(190, 24, 93, 0.25)" },
-  "📈 Leveling & Advancement": { bg: "rgba(91, 82, 153, 0.08)", border: "rgba(91, 82, 153, 0.25)" },
-  "💰 Equipment & Loot": { bg: "rgba(120, 113, 108, 0.08)", border: "rgba(120, 113, 108, 0.25)" },
-  "🪄 Spellcasting": { bg: "rgba(126, 34, 206, 0.08)", border: "rgba(126, 34, 206, 0.25)" },
-  "📌 Edge Cases & Tips": { bg: "rgba(100, 116, 139, 0.08)", border: "rgba(100, 116, 139, 0.25)" },
-  "🔮 Arcana Domain Cards": { bg: "rgba(110, 69, 168, 0.08)", border: "rgba(110, 69, 168, 0.25)" },
-  "🗡️ Blade Domain Cards": { bg: "rgba(163, 29, 29, 0.08)", border: "rgba(163, 29, 29, 0.25)" },
-  "🦴 Bone Domain Cards": { bg: "rgba(120, 113, 108, 0.08)", border: "rgba(120, 113, 108, 0.25)" },
-  "📚 Codex Domain Cards": { bg: "rgba(45, 90, 142, 0.08)", border: "rgba(45, 90, 142, 0.25)" },
-  "💃 Grace Domain Cards": { bg: "rgba(181, 54, 111, 0.08)", border: "rgba(181, 54, 111, 0.25)" },
-  "🌘 Midnight Domain Cards": { bg: "rgba(94, 110, 143, 0.08)", border: "rgba(94, 110, 143, 0.25)" },
-  "🌿 Sage Domain Cards": { bg: "rgba(22, 163, 74, 0.08)", border: "rgba(22, 163, 74, 0.25)" },
-  "✨ Splendor Domain Cards": { bg: "rgba(168, 138, 12, 0.08)", border: "rgba(168, 138, 12, 0.25)" },
-  "🛡️ Valor Domain Cards": { bg: "rgba(185, 28, 28, 0.08)", border: "rgba(185, 28, 28, 0.25)" },
-  "⚜️ Classes & Subclasses": { bg: "rgba(163, 29, 29, 0.07)", border: "rgba(163, 29, 29, 0.22)" },
-  "🧬 Ancestries (18)": { bg: "rgba(115, 71, 201, 0.07)", border: "rgba(115, 71, 201, 0.22)" },
-  "🏘️ Communities (9)": { bg: "rgba(13, 148, 136, 0.07)", border: "rgba(13, 148, 136, 0.22)" },
-};
-
-export { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS };
+export { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES };

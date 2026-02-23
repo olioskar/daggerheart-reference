@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { Pill } from "../Pill";
-import { PILL_TINTS } from "../../data/categories";
+
 import styles from "./PillGroup.module.css";
 
 export function PillGroup({ categories, groupLabel, variant, activeCategories, onPillClick, onGroupClick }) {
@@ -25,15 +25,11 @@ export function PillGroup({ categories, groupLabel, variant, activeCategories, o
         const groupBorder = isRulesGroup
           ? "rgba(245, 158, 11, 0.3)"
           : "rgba(167, 139, 250, 0.3)";
-        const tint = PILL_TINTS[c.category];
-
         let pillBorder = groupBorder;
-        let pillBg = "transparent";
+        let pillBg = `color-mix(in srgb, ${c.color} 8%, transparent)`;
         if (isActive) {
           pillBorder = `color-mix(in srgb, ${c.color} 47%, transparent)`;
           pillBg = `color-mix(in srgb, ${c.color} 20%, transparent)`;
-        } else if (tint) {
-          pillBg = tint.bg;
         }
 
         return (
