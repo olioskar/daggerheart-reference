@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { SearchInput } from "./components/SearchInput";
+import { Pill } from "./components/Pill";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -68,12 +69,14 @@ export default function DaggerheartRef() {
     }
 
     return (
-      <button
+      <Pill
         key={c.category}
+        label={label}
+        active={isActive}
         onClick={() => handlePillClick(c.category)}
-        className={`dhr-category-pill${isActive ? " dhr-category-pill--active" : ""}`}
-        style={{ "--pill-border": pillBorder, "--pill-bg": pillBg }}
-      >{label}</button>
+        pillBorder={pillBorder}
+        pillBg={pillBg}
+      />
     );
   }
 

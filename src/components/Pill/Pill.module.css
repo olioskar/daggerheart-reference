@@ -1,0 +1,15 @@
+.pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--pill-border, var(--dhr-border-strong));
+  background: var(--pill-bg, transparent);
+  color: var(--dhr-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.active {
+  color: var(--dhr-text-bright);
+}
