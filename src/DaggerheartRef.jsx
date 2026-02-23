@@ -4,6 +4,7 @@ import { SearchInput } from "./components/SearchInput";
 import { PillGroup } from "./components/PillGroup";
 import { CategoryGroup } from "./components/CategoryGroup";
 import { TwoColumnLayout } from "./components/TwoColumnLayout";
+import { Header } from "./components/Header";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -77,12 +78,7 @@ export default function DaggerheartRef() {
 
   return (
     <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
-      <div className="dhr-header">
-        <h1 className="dhr-header__title">bench notes</h1>
-        <p className="dhr-header__subtitle">
-          a daggerheart™ quick reference by oli
-        </p>
-      </div>
+      <Header title="bench notes" subtitle="a daggerheart™ quick reference by oli" />
 
       <SearchInput
         value={search}
