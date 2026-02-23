@@ -72,7 +72,7 @@ export default function DaggerheartRef() {
   const themeToggle = <ThemeToggle theme={theme} onToggle={toggleTheme} />;
 
   return (
-    <div className={`${styles.root}${isTwoColumn ? ` ${styles.twoColumn}` : ""}`}>
+    <main className={`${styles.root}${isTwoColumn ? ` ${styles.twoColumn}` : ""}`}>
       <Header title="bench notes" subtitle="a daggerheart™ quick reference by oli" />
 
       <SearchInput
@@ -143,6 +143,6 @@ export default function DaggerheartRef() {
           More information at <a href="https://www.daggerheart.com" target="_blank" rel="noopener noreferrer">daggerheart.com</a>. Content has been edited, condensed, and reorganized for quick reference. No previous modifications by others.
         </p>
       </Footer>
-    </div>
+    </main>
   );
 }

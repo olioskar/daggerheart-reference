@@ -2,14 +2,14 @@ import styles from "./SearchInput.module.css";
 
 export function SearchInput({ value, onChange, placeholder }) {
   return (
-    <div className={styles.wrapper}>
+    <search className={styles.wrapper}>
       <input
-        type="text"
+        type="search"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         className={styles.input}
       />
-    </div>
+    </search>
   );
 }
