@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { ChevronRight } from "lucide-react";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { SearchInput } from "./components/SearchInput";
-import { Pill } from "./components/Pill";
+import { PillGroup } from "./components/PillGroup";
 import "./DaggerheartRef.css";
-import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES, PILL_TINTS } from "./data/categories";
+import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
 import { matchesSearch } from "./utils/search";
 import { useTheme } from "./hooks/useTheme";
@@ -49,37 +48,6 @@ export default function DaggerheartRef() {
     setSearch("");
   }
 
-  function renderPill(c) {
-    const label = c.category.replace(/^[^\w]*/, "").replace(/\s*\(\d+\)$/, "").trim();
-    const isActive = (filter !== null && filter.has(c.category)) ||
-      (search && filtered.some(f => f.category === c.category));
-    const isRulesGroup = RULES_MECHANICS.includes(c.category);
-    const groupBorder = isRulesGroup
-      ? "rgba(245, 158, 11, 0.3)"
-      : "rgba(167, 139, 250, 0.3)";
-    const tint = PILL_TINTS[c.category];
-
-    let pillBorder = groupBorder;
-    let pillBg = "transparent";
-    if (isActive) {
-      pillBorder = c.color + "77";
-      pillBg = c.color + "33";
-    } else if (tint) {
-      pillBg = tint.bg;
-    }
-
-    return (
-      <Pill
-        key={c.category}
-        label={label}
-        active={isActive}
-        onClick={() => handlePillClick(c.category)}
-        pillBorder={pillBorder}
-        pillBg={pillBg}
-      />
-    );
-  }
-
   function renderCategories(categories) {
     return categories.map(cat => (
       <div key={cat.category} className="dhr-category" style={{ "--cat-color": cat.color, "--cat-color-40": cat.color + "66" }}>
@@ -117,24 +85,6 @@ export default function DaggerheartRef() {
     setSearch("");
   }
 
-  function renderPillGroup(columnOrder, groupLabel, labelCls) {
-    const cats = columnOrder.map(cat => data.find(d => d.category === cat)).filter(Boolean);
-    const isActive = filter !== null && columnOrder.every(c => filter.has(c));
-    return (
-      <>
-        <button
-          className={`dhr-pill-group-label ${labelCls}${isActive ? " dhr-pill-group-label--active" : ""}`}
-          onClick={() => handleGroupLabelClick(columnOrder)}
-        >
-          {groupLabel}
-          <ChevronRight size={12} className="dhr-pill-group-label__icon" />
-          <ChevronRight size={12} className={`dhr-pill-group-label__icon dhr-pill-group-label__icon--second${isActive ? " dhr-pill-group-label__icon--visible" : ""}`} />
-        </button>
-        {cats.map(renderPill)}
-      </>
-    );
-  }
-
   const hasActiveFilter = filter !== null || search !== "";
 
   function handleClearFilters() {
@@ -170,8 +120,26 @@ export default function DaggerheartRef() {
       </div>
 
       <div className="dhr-pill-groups-wrapper">
-        {renderPillGroup(RULES_MECHANICS, "Rules & Mechanics", "dhr-pill-group-label--rules")}
-        {renderPillGroup(CARDS_HERITAGE, "Cards, Classes & Heritage", "dhr-pill-group-label--cards")}
+        <PillGroup
+          categories={RULES_MECHANICS.map(cat => data.find(d => d.category === cat)).filter(Boolean)}
+          groupLabel="Rules & Mechanics"
+          variant="rules"
+          filter={filter}
+          search={search}
+          filtered={filtered}
+          onPillClick={handlePillClick}
+          onGroupClick={() => handleGroupLabelClick(RULES_MECHANICS)}
+        />
+        <PillGroup
+          categories={CARDS_HERITAGE.map(cat => data.find(d => d.category === cat)).filter(Boolean)}
+          groupLabel="Cards, Classes & Heritage"
+          variant="cards"
+          filter={filter}
+          search={search}
+          filtered={filtered}
+          onPillClick={handlePillClick}
+          onGroupClick={() => handleGroupLabelClick(CARDS_HERITAGE)}
+        />
       </div>
 
       {isTwoColumn ? (

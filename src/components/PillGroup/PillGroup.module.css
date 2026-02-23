@@ -1,0 +1,64 @@
+.groupLabel {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.groupLabelIcon {
+  flex-shrink: 0;
+  height: 12px;
+  width: 12px;
+}
+
+.groupLabelIconSecond {
+  width: 0;
+  opacity: 0;
+  margin-left: -2px;
+  overflow: hidden;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+.groupLabelIconVisible {
+  width: 12px;
+  opacity: 1;
+  margin-left: -6px;
+}
+
+.rules {
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.rules.groupLabelActive {
+  border-color: rgba(245, 158, 11, 0.7);
+  background: rgba(245, 158, 11, 0.3);
+}
+
+.cards {
+  color: #a78bfa;
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.08);
+  margin-left: 8px;
+}
+
+.cards.groupLabelActive {
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(167, 139, 250, 0.25);
+}
+
+:global([data-theme="light"]) .rules {
+  color: #8a5a00;
+}
+
+:global([data-theme="light"]) .cards {
+  color: #7c3aed;
+}
