@@ -33,7 +33,7 @@
 }
 
 .rules {
-  color: #f59e0b;
+  color: var(--dhr-accent-amber);
   border-color: rgba(245, 158, 11, 0.4);
   background: rgba(245, 158, 11, 0.15);
 }
@@ -44,7 +44,7 @@
 }
 
 .cards {
-  color: #a78bfa;
+  color: var(--dhr-accent-purple);
   border-color: rgba(167, 139, 250, 0.4);
   background: rgba(167, 139, 250, 0.08);
   margin-left: 8px;
@@ -56,9 +56,9 @@
 }
 
 :global([data-theme="light"]) .rules {
-  color: #8a5a00;
+  color: var(--dhr-accent-amber-text);
 }
 
 :global([data-theme="light"]) .cards {
-  color: #7c3aed;
+  color: var(--dhr-accent-purple-text);
 }

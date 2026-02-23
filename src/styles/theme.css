@@ -22,6 +22,10 @@
   --dhr-gradient-1: rgba(40, 30, 50, 0.6);
   --dhr-gradient-2: rgba(20, 15, 30, 0.4);
   --dhr-grain-opacity: 0.12;
+
+  /* Accents (fixed across themes) */
+  --dhr-accent-amber: #f59e0b;
+  --dhr-accent-purple: #a78bfa;
 }
 
 [data-theme="light"] {
@@ -44,6 +48,12 @@
   --dhr-gradient-1: rgba(180, 170, 190, 0.15);
   --dhr-gradient-2: rgba(170, 165, 180, 0.1);
   --dhr-grain-opacity: 0.05;
+
+  /* Accent overrides for light theme */
+  --dhr-accent-amber-text: #8a5a00;
+  --dhr-accent-purple-text: #7c3aed;
+  --dhr-accent-amber-icon: #d97706;
+  --dhr-accent-purple-icon: #7c3aed;
 }
 
 body {

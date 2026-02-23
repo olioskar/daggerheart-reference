@@ -20,12 +20,12 @@
 }
 
 .iconMoon {
-  color: #a78bfa;
+  color: var(--dhr-accent-purple);
   opacity: 0.3;
 }
 
 .iconSun {
-  color: #f59e0b;
+  color: var(--dhr-accent-amber);
   opacity: 0.3;
 }
 
@@ -33,12 +33,12 @@
 .iconSun.active { opacity: 0.9; }
 
 :global([data-theme="light"]) .iconMoon {
-  color: #7c3aed;
+  color: var(--dhr-accent-purple-icon);
   opacity: 0.25;
 }
 
 :global([data-theme="light"]) .iconSun {
-  color: #d97706;
+  color: var(--dhr-accent-amber-icon);
 }
 
 :global([data-theme="light"]) .iconSun.active {
