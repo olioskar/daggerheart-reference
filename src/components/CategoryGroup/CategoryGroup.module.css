@@ -1,0 +1,23 @@
+.category {
+  margin-bottom: 18px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cat-color);
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+:global([data-theme="light"]) .label {
+  color: color-mix(in srgb, var(--cat-color) 65%, black);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { SearchInput } from "./components/SearchInput";
 import { PillGroup } from "./components/PillGroup";
+import { CategoryGroup } from "./components/CategoryGroup";
 import "./DaggerheartRef.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
@@ -50,33 +51,12 @@ export default function DaggerheartRef() {
 
   function renderCategories(categories) {
     return categories.map(cat => (
-      <div key={cat.category} className="dhr-category" style={{ "--cat-color": cat.color, "--cat-color-40": cat.color + "66" }}>
-        <div className="dhr-category__label">
-          {cat.category}
-        </div>
-        <div className="dhr-category__list">
-          {cat.questions.map((item, i) => {
-            const key = `${cat.category}-${i}`;
-            const isOpen = openQ === key;
-            return (
-              <div key={key}>
-                <button
-                  onClick={() => toggle(key)}
-                  className={`dhr-qa-question${isOpen ? " dhr-qa-question--open" : ""}`}
-                >
-                  <span>{item.q}</span>
-                  <span className={`dhr-qa-icon${isOpen ? " dhr-qa-icon--open" : ""}`}>+</span>
-                </button>
-                {isOpen && (
-                  <div className="dhr-qa-answer">
-                    {item.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <CategoryGroup
+        key={cat.category}
+        category={cat}
+        openQ={openQ}
+        onToggle={toggle}
+      />
     ));
   }
 

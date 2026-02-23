@@ -1,0 +1,1 @@
+export { QACard } from "./QACard";
