@@ -39,6 +39,8 @@ export default function DaggerheartRef() {
     ...(search ? filtered.map(f => f.category) : []),
   ]);
 
+  const [col1, col2] = isTwoColumn ? distributeColumns(orderedFiltered) : [orderedFiltered, []];
+
   function handlePillClick(category) {
     const active = filter ?? new Set();
     const next = new Set(active);
@@ -51,17 +53,6 @@ export default function DaggerheartRef() {
 
     setFilter(next.size > 0 ? next : null);
     setSearch("");
-  }
-
-  function renderCategories(categories) {
-    return categories.map(cat => (
-      <CategoryGroup
-        key={cat.category}
-        category={cat}
-        openQ={openQ}
-        onToggle={toggle}
-      />
-    ));
   }
 
   function handleGroupLabelClick(categories) {
@@ -118,16 +109,14 @@ export default function DaggerheartRef() {
       </div>
 
       {isTwoColumn ? (
-        (() => {
-          const [col1, col2] = distributeColumns(orderedFiltered);
-          return (
-            <TwoColumnLayout
-              columns={[renderCategories(col1), renderCategories(col2)]}
-            />
-          );
-        })()
+        <TwoColumnLayout columns={[
+          col1.map(cat => <CategoryGroup key={cat.category} category={cat} openQ={openQ} onToggle={toggle} />),
+          col2.map(cat => <CategoryGroup key={cat.category} category={cat} openQ={openQ} onToggle={toggle} />),
+        ]} />
       ) : (
-        renderCategories(orderedFiltered)
+        orderedFiltered.map(cat => (
+          <CategoryGroup key={cat.category} category={cat} openQ={openQ} onToggle={toggle} />
+        ))
       )}
 
       {filtered.length === 0 && (
