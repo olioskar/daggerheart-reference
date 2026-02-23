@@ -1,5 +1,5 @@
 .root {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: var(--dhr-font-body);
   width: 100%;
   max-width: 540px;
   margin: 0 auto;

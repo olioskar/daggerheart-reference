@@ -14,6 +14,7 @@
 }
 
 .title {
+  font-family: var(--dhr-font-display);
   font-size: 26px;
   font-weight: 300;
   color: var(--dhr-accent-amber);

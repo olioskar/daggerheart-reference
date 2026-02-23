@@ -26,6 +26,10 @@
   /* Accents (fixed across themes) */
   --dhr-accent-amber: #f59e0b;
   --dhr-accent-purple: #a78bfa;
+
+  /* Typography */
+  --dhr-font-display: 'Josefin Sans', system-ui, sans-serif;
+  --dhr-font-body: 'Nunito', system-ui, sans-serif;
 }
 
 [data-theme="light"] {
@@ -60,6 +64,11 @@ body {
   background-color: var(--dhr-bg);
   min-height: 100vh;
   position: relative;
+  font-family: var(--dhr-font-body);
+}
+
+*, *::before, *::after {
+  font-family: inherit;
 }
 
 body::before {
