@@ -1,12 +1,6 @@
 import { useState } from "react";
-import { ThemeToggle } from "./components/ThemeToggle";
-import { SearchInput } from "./components/SearchInput";
-import { PillGroup } from "./components/PillGroup";
-import { CategoryGroup } from "./components/CategoryGroup";
-import { TwoColumnLayout } from "./components/TwoColumnLayout";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import "./DaggerheartRef.css";
+import { ThemeToggle, SearchInput, PillGroup, CategoryGroup, TwoColumnLayout, Header, Footer } from "./components";
+import styles from "./DaggerheartRef.module.css";
 import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
 import { distributeColumns } from "./utils/distributeColumns";
 import { matchesSearch } from "./utils/search";
@@ -78,7 +72,7 @@ export default function DaggerheartRef() {
   const themeToggle = <ThemeToggle theme={theme} onToggle={toggleTheme} />;
 
   return (
-    <div className={`dhr-root${isTwoColumn ? " dhr-root--two-column" : ""}`}>
+    <div className={`${styles.root}${isTwoColumn ? ` ${styles.twoColumn}` : ""}`}>
       <Header title="bench notes" subtitle="a daggerheart™ quick reference by oli" />
 
       <SearchInput
@@ -87,9 +81,9 @@ export default function DaggerheartRef() {
         placeholder="Search rules, classes, ancestries..."
       />
 
-      <div className="dhr-action-pills-row">
+      <div className={styles.actionPills}>
         <button
-          className={`dhr-clear-pill${hasActiveFilter ? " dhr-clear-pill--active" : ""}`}
+          className={`${styles.clearPill}${hasActiveFilter ? ` ${styles.clearPillActive}` : ""}`}
           onClick={handleClearFilters}
         >
           {hasActiveFilter ? "Clear Filters" : "All Topics Visible"}
@@ -97,7 +91,7 @@ export default function DaggerheartRef() {
         {themeToggle}
       </div>
 
-      <div className="dhr-pill-groups-wrapper">
+      <div className={styles.pillGroups}>
         <PillGroup
           categories={RULES_MECHANICS.map(cat => data.find(d => d.category === cat)).filter(Boolean)}
           groupLabel="Rules & Mechanics"
@@ -134,7 +128,7 @@ export default function DaggerheartRef() {
       )}
 
       {filtered.length === 0 && (
-        <div className="dhr-no-results">
+        <div className={styles.noResults}>
           No results for &quot;{search}&quot;
         </div>
       )}

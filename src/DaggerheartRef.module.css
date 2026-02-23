@@ -1,0 +1,61 @@
+.root {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background: transparent;
+  min-height: 100vh;
+  color: var(--dhr-text);
+  position: relative;
+  z-index: 1;
+  overflow-x: clip;
+}
+
+.twoColumn {
+  max-width: 1180px;
+}
+
+.actionPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.pillGroups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.clearPill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(85, 170, 150, 0.25);
+  background: rgba(85, 170, 150, 0.08);
+  color: var(--dhr-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.clearPillActive {
+  border-color: rgba(85, 170, 150, 0.5);
+  background: rgba(85, 170, 150, 0.2);
+  color: var(--dhr-text-secondary);
+}
+
+.noResults {
+  text-align: center;
+  color: var(--dhr-text-dim);
+  padding: 40px;
+  font-size: 14px;
+}
