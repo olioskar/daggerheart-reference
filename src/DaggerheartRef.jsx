@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { ThemeToggle, SearchInput, PillGroup, CategoryGroup, TwoColumnLayout, Header, Footer } from "./components";
 import styles from "./DaggerheartRef.module.css";
-import { data, RULES_MECHANICS, CARDS_HERITAGE, ALL_CATEGORIES } from "./data/categories";
+import { getCategories, getRulesMechanics, getCardsHeritage, getAllCategories } from "./data";
 import { distributeColumns } from "./utils/distributeColumns";
 import { matchesSearch } from "./utils/search";
 import { useTheme } from "./hooks/useTheme";
 import { useResponsiveColumns } from "./hooks/useResponsiveColumns";
 
-const categoryMap = new Map(data.map(d => [d.category, d]));
-
 export default function DaggerheartRef() {
+  const data = getCategories("en");
+  const RULES_MECHANICS = getRulesMechanics("en");
+  const CARDS_HERITAGE = getCardsHeritage("en");
+  const ALL_CATEGORIES = getAllCategories("en");
+  const categoryMap = new Map(data.map(d => [d.category, d]));
   const [openQs, setOpenQs] = useState(new Set());
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
