@@ -7,18 +7,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — start Vite dev server with HMR
 - `npm run build` — production build to `dist/`
 - `npm run lint` — ESLint
+- `npm run preview` — preview production build locally
 - `npm run deploy` — build + deploy to GitHub Pages via `gh-pages -d dist`
 
 ## Architecture
 
-Single-page Daggerheart TTRPG quick reference app. React 19 + Vite + Tailwind CSS v4.
+Single-page Daggerheart TTRPG quick reference app. React 19 + Vite.
 
-**Key files:**
-- `src/DaggerheartRef.jsx` — the entire app: all SRD data (inline as a large `data` array), search/filter logic, and rendering. ~1600 lines.
-- `src/index.css` — global styles: dark background with SVG noise grain texture via `::before`/`::after` pseudo-elements.
-- `vite.config.js` — sets `base: '/daggerheart-reference/'` for GitHub Pages subdirectory hosting.
+**Structure:**
+- `src/DaggerheartRef.jsx` — orchestrator (~145 lines): wires data, hooks, and components together
+- `src/data/categories.js` — all SRD data + category constants
+- `src/components/` — 9 components: Header, Footer, SearchInput, ThemeToggle, Pill, PillGroup, Card, CategoryGroup, TwoColumnLayout
+- `src/hooks/` — useTheme (dark/light toggle), useResponsiveColumns (800px breakpoint)
+- `src/utils/` — distributeColumns, matchesSearch
+- `src/styles/theme.css` — CSS custom properties (surfaces, borders, text tiers, accents, fonts)
+- `src/index.css` — global styles: dark background with SVG noise grain texture
+- `vite.config.js` — sets `base: '/daggerheart-reference/'` for GitHub Pages
 
-**How it works:** `DaggerheartRef` is a single component that renders categorized Q&A entries. Categories are filterable via pills and searchable. "Domain Cards" categories are sorted last in the pill bar with a subtler visual style. All styling is inline (no CSS modules/classes) except the body background in `index.css`.
+**How it works:** DaggerheartRef orchestrates categorized Q&A entries. Categories are filterable via pills and searchable. "Domain Cards" categories sort last with subtler styling. Module-scope `categoryMap` (Map) provides O(1) category lookups.
+
+**Styling:** CSS Modules per component (`.module.css`). Theme vars as `:root` custom properties in theme.css. Category colors applied via inline `--cat-color` CSS vars. Alpha variants use `color-mix()` — no hex string concatenation.
 
 ## Deployment
 
