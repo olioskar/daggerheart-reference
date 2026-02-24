@@ -7,3 +7,4 @@ export { CategoryGroup } from "./CategoryGroup";
 export { TwoColumnLayout } from "./TwoColumnLayout";
 export { Header } from "./Header";
 export { Footer } from "./Footer";
+export { LanguageToggle } from "./LanguageToggle";
