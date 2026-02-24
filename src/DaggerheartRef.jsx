@@ -1,23 +1,35 @@
-import { useState } from "react";
-import { ThemeToggle, SearchInput, PillGroup, CategoryGroup, TwoColumnLayout, Header, Footer } from "./components";
+import { useState, useMemo } from "react";
+import { ThemeToggle, LanguageToggle, SearchInput, PillGroup, CategoryGroup, TwoColumnLayout, Header, Footer } from "./components";
 import styles from "./DaggerheartRef.module.css";
 import { getCategories, getRulesMechanics, getCardsHeritage, getAllCategories } from "./data";
+import { getStrings } from "./data/ui-strings";
 import { distributeColumns } from "./utils/distributeColumns";
 import { matchesSearch } from "./utils/search";
 import { useTheme } from "./hooks/useTheme";
+import { useLocale } from "./hooks/useLocale";
 import { useResponsiveColumns } from "./hooks/useResponsiveColumns";
 
 export default function DaggerheartRef() {
-  const data = getCategories("en");
-  const RULES_MECHANICS = getRulesMechanics("en");
-  const CARDS_HERITAGE = getCardsHeritage("en");
-  const ALL_CATEGORIES = getAllCategories("en");
-  const categoryMap = new Map(data.map(d => [d.category, d]));
   const [openQs, setOpenQs] = useState(new Set());
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
   const { theme, toggleTheme } = useTheme();
+  const { locale, toggleLocale } = useLocale();
   const isTwoColumn = useResponsiveColumns(800);
+
+  const data = useMemo(() => getCategories(locale), [locale]);
+  const RULES_MECHANICS = useMemo(() => getRulesMechanics(locale), [locale]);
+  const CARDS_HERITAGE = useMemo(() => getCardsHeritage(locale), [locale]);
+  const ALL_CATEGORIES = useMemo(() => getAllCategories(locale), [locale]);
+  const strings = useMemo(() => getStrings(locale), [locale]);
+  const categoryMap = useMemo(() => new Map(data.map(d => [d.category, d])), [data]);
+
+  function handleLocaleToggle() {
+    toggleLocale();
+    setFilter(null);
+    setSearch("");
+    setOpenQs(new Set());
+  }
 
   function toggle(key) {
     setOpenQs(prev => {
@@ -84,7 +96,7 @@ export default function DaggerheartRef() {
       <SearchInput
         value={search}
         onChange={e => { setSearch(e.target.value); setFilter(null); }}
-        placeholder="Search rules, classes, ancestries..."
+        placeholder={strings.searchPlaceholder}
       />
 
       <div className={styles.actionPills}>
@@ -92,15 +104,16 @@ export default function DaggerheartRef() {
           className={`${styles.clearPill}${hasActiveFilter ? ` ${styles.clearPillActive}` : ""}`}
           onClick={handleClearFilters}
         >
-          {hasActiveFilter ? "Clear Filters" : "All Topics Visible"}
+          {hasActiveFilter ? strings.clearFilters : strings.allTopicsVisible}
         </button>
+        <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
         {themeToggle}
       </div>
 
       <div className={styles.pillGroups}>
         <PillGroup
           categories={RULES_MECHANICS.map(name => categoryMap.get(name)).filter(Boolean)}
-          groupLabel="Rules & Mechanics"
+          groupLabel={strings.rulesGroup}
           variant="rules"
           activeCategories={activeCategories}
           onPillClick={handlePillClick}
@@ -108,7 +121,7 @@ export default function DaggerheartRef() {
         />
         <PillGroup
           categories={CARDS_HERITAGE.map(name => categoryMap.get(name)).filter(Boolean)}
-          groupLabel="Cards, Classes & Heritage"
+          groupLabel={strings.cardsGroup}
           variant="cards"
           activeCategories={activeCategories}
           onPillClick={handlePillClick}
@@ -129,7 +142,7 @@ export default function DaggerheartRef() {
 
       {filtered.length === 0 && (
         <div className={styles.noResults}>
-          No results for &quot;{search}&quot;
+          {strings.noResults(search)}
         </div>
       )}
 
