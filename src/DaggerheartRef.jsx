@@ -9,6 +9,9 @@ import { useTheme } from "./hooks/useTheme";
 import { useLocale } from "./hooks/useLocale";
 import { useResponsiveColumns } from "./hooks/useResponsiveColumns";
 
+const DOMAIN_NAMES = ["Arcana", "Blade", "Bone", "Codex", "Grace", "Midnight", "Sage", "Splendor", "Valor"];
+const isDomain = n => DOMAIN_NAMES.some(d => n.includes(d));
+
 export default function DaggerheartRef() {
   const [openQs, setOpenQs] = useState(new Set());
   const [filter, setFilter] = useState(null);
@@ -75,8 +78,18 @@ export default function DaggerheartRef() {
     setSearch("");
   }
 
-  function handleGroupLabelClick(categories) {
-    setFilter(new Set(categories));
+  function handleGroupToggle(categories) {
+    const active = filter ?? new Set();
+    const allActive = categories.every(c => active.has(c));
+    const next = new Set(active);
+
+    if (allActive) {
+      categories.forEach(c => next.delete(c));
+    } else {
+      categories.forEach(c => next.add(c));
+    }
+
+    setFilter(next.size > 0 ? next : null);
     setSearch("");
   }
 
@@ -93,22 +106,45 @@ export default function DaggerheartRef() {
     <main className={`${styles.root}${isTwoColumn ? ` ${styles.twoColumn}` : ""}`}>
       <Header title="bench notes" subtitle="a daggerheart™ quick reference by oli" />
 
-      <SearchInput
-        value={search}
-        onChange={e => { setSearch(e.target.value); setFilter(null); }}
-        placeholder={strings.searchPlaceholder}
-      />
-
-      <div className={styles.actionPills}>
-        <button
-          className={`${styles.clearPill}${hasActiveFilter ? ` ${styles.clearPillActive}` : ""}`}
-          onClick={handleClearFilters}
-        >
-          {hasActiveFilter ? strings.clearFilters : strings.allTopicsVisible}
-        </button>
-        <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
-        {themeToggle}
-      </div>
+      {isTwoColumn ? (
+        <div className={styles.toolbar}>
+          <div className={styles.searchSlot}>
+            <SearchInput
+              value={search}
+              onChange={e => { setSearch(e.target.value); setFilter(null); }}
+              placeholder={strings.searchPlaceholder}
+            />
+          </div>
+          <div className={styles.actionPills}>
+            <button
+              className={`${styles.clearPill}${hasActiveFilter ? ` ${styles.clearPillActive}` : ""}`}
+              onClick={handleClearFilters}
+            >
+              {filter ? `${strings.clearFilters} (${filter.size}) \u00d7` : search ? `${strings.clearFilters} \u00d7` : strings.allTopicsVisible}
+            </button>
+            <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
+            {themeToggle}
+          </div>
+        </div>
+      ) : (
+        <>
+          <SearchInput
+            value={search}
+            onChange={e => { setSearch(e.target.value); setFilter(null); }}
+            placeholder={strings.searchPlaceholder}
+          />
+          <div className={styles.actionPills}>
+            <button
+              className={`${styles.clearPill}${hasActiveFilter ? ` ${styles.clearPillActive}` : ""}`}
+              onClick={handleClearFilters}
+            >
+              {filter ? `${strings.clearFilters} (${filter.size}) \u00d7` : search ? `${strings.clearFilters} \u00d7` : strings.allTopicsVisible}
+            </button>
+            <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
+            {themeToggle}
+          </div>
+        </>
+      )}
 
       <div className={styles.pillGroups}>
         <PillGroup
@@ -117,15 +153,17 @@ export default function DaggerheartRef() {
           variant="rules"
           activeCategories={activeCategories}
           onPillClick={handlePillClick}
-          onGroupClick={() => handleGroupLabelClick(RULES_MECHANICS)}
+          onGroupClick={() => handleGroupToggle(RULES_MECHANICS)}
         />
         <PillGroup
-          categories={CARDS_HERITAGE.map(name => categoryMap.get(name)).filter(Boolean)}
+          categories={CARDS_HERITAGE.filter(n => !isDomain(n)).map(name => categoryMap.get(name)).filter(Boolean)}
           groupLabel={strings.cardsGroup}
           variant="cards"
           activeCategories={activeCategories}
           onPillClick={handlePillClick}
-          onGroupClick={() => handleGroupLabelClick(CARDS_HERITAGE)}
+          onGroupClick={() => handleGroupToggle(CARDS_HERITAGE)}
+          domainCards={CARDS_HERITAGE.filter(isDomain).map(name => categoryMap.get(name)).filter(Boolean)}
+          onDomainAllClick={() => handleGroupToggle(CARDS_HERITAGE.filter(isDomain))}
         />
       </div>
 

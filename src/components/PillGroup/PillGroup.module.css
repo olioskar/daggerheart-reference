@@ -1,64 +1,130 @@
-.groupLabel {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
-  display: inline-flex;
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Section header with title — line — all toggle */
+.header {
+  display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
 }
 
-.groupLabelIcon {
+.title {
+  font-family: var(--dhr-font-display);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
   flex-shrink: 0;
-  height: 12px;
-  width: 12px;
 }
 
-.groupLabelIconSecond {
-  width: 0;
-  opacity: 0;
-  margin-left: -2px;
-  overflow: hidden;
-  transition: width 0.2s ease, opacity 0.2s ease;
+.title.amber {
+  color: color-mix(in srgb, var(--dhr-accent-amber) 70%, var(--dhr-text-muted));
 }
 
-.groupLabelIconVisible {
-  width: 12px;
-  opacity: 1;
-  margin-left: -6px;
+.title.purple {
+  color: color-mix(in srgb, var(--dhr-accent-purple) 70%, var(--dhr-text-muted));
 }
 
-.rules {
-  color: var(--dhr-accent-amber);
-  border-color: rgba(245, 158, 11, 0.4);
-  background: rgba(245, 158, 11, 0.15);
+.line {
+  flex: 1;
+  height: 1px;
+  background: var(--dhr-border-strong);
 }
 
-.rules.groupLabelActive {
-  border-color: rgba(245, 158, 11, 0.7);
-  background: rgba(245, 158, 11, 0.3);
+.allToggle {
+  font-family: var(--dhr-font-body);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--dhr-text-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
 }
 
-.cards {
-  color: var(--dhr-accent-purple);
-  border-color: rgba(167, 139, 250, 0.4);
-  background: rgba(167, 139, 250, 0.08);
-  margin-left: 8px;
+.allToggle:hover {
+  color: var(--dhr-text-secondary);
 }
 
-.cards.groupLabelActive {
-  border-color: rgba(167, 139, 250, 0.7);
-  background: rgba(167, 139, 250, 0.25);
+.allToggleActive {
+  color: var(--dhr-text-secondary);
 }
 
-:global([data-theme="light"]) .rules {
+/* Pills container */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Domain cards sub-group */
+.domainGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 12px;
+  border-left: 1px solid color-mix(in srgb, var(--dhr-accent-purple) 25%, transparent);
+}
+
+.domainHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.domainLabel {
+  font-family: var(--dhr-font-body);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dhr-text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.domainToggle {
+  font-family: var(--dhr-font-body);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--dhr-text-dim);
+  background: none;
+  border: 1px solid var(--dhr-border-strong);
+  cursor: pointer;
+  padding: 1px 6px;
+  border-radius: 4px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.domainToggle:hover {
+  color: var(--dhr-text-muted);
+  border-color: var(--dhr-border-strong);
+}
+
+.domainToggleActive {
+  color: var(--dhr-text-secondary);
+  border-color: var(--dhr-border-strong);
+}
+
+.domainPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Light theme adjustments */
+:global([data-theme="light"]) .title.amber {
   color: var(--dhr-accent-amber-text);
 }
 
-:global([data-theme="light"]) .cards {
+:global([data-theme="light"]) .title.purple {
   color: var(--dhr-accent-purple-text);
 }

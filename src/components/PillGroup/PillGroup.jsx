@@ -1,48 +1,69 @@
-import { ChevronRight } from "lucide-react";
 import { Pill } from "../Pill";
-
 import styles from "./PillGroup.module.css";
 
-export function PillGroup({ categories, groupLabel, variant, activeCategories, onPillClick, onGroupClick }) {
-  const isGroupActive = categories.every(c => activeCategories.has(c.category));
+function stripLabel(category) {
+  return category.replace(/^[^\p{L}\d]*/u, "").replace(/\s*\(\d+\)$/, "").trim();
+}
 
-  const variantClass = variant === "rules" ? styles.rules : styles.cards;
+function stripDomainLabel(category) {
+  return stripLabel(category).replace(/ (Domain Cards|sviðsspjöld)$/i, "");
+}
+
+export function PillGroup({ categories, groupLabel, variant, activeCategories, onPillClick, onGroupClick, domainCards, domainLabel, onDomainAllClick }) {
+  const isGroupActive = categories.every(c => activeCategories.has(c.category));
+  const allDomainActive = domainCards?.length > 0 && domainCards.every(c => activeCategories.has(c.category));
+  const colorClass = variant === "rules" ? styles.amber : styles.purple;
 
   return (
-    <>
-      <button
-        className={`${styles.groupLabel} ${variantClass}${isGroupActive ? ` ${styles.groupLabelActive}` : ""}`}
-        onClick={onGroupClick}
-      >
-        {groupLabel}
-        <ChevronRight size={12} className={styles.groupLabelIcon} />
-        <ChevronRight size={12} className={`${styles.groupLabelIcon} ${styles.groupLabelIconSecond}${isGroupActive ? ` ${styles.groupLabelIconVisible}` : ""}`} />
-      </button>
-      {categories.map(c => {
-        const label = c.category.replace(/^[^\w]*/, "").replace(/\s*\(\d+\)$/, "").trim();
-        const isActive = activeCategories.has(c.category);
-        const isRulesGroup = variant === "rules";
-        const groupBorder = isRulesGroup
-          ? "rgba(245, 158, 11, 0.3)"
-          : "rgba(167, 139, 250, 0.3)";
-        let pillBorder = groupBorder;
-        let pillBg = `color-mix(in srgb, ${c.color} 8%, transparent)`;
-        if (isActive) {
-          pillBorder = `color-mix(in srgb, ${c.color} 47%, transparent)`;
-          pillBg = `color-mix(in srgb, ${c.color} 20%, transparent)`;
-        }
+    <div className={styles.section}>
+      <div className={styles.header}>
+        <span className={`${styles.title} ${colorClass}`}>{groupLabel}</span>
+        <span className={styles.line} />
+        <button
+          className={`${styles.allToggle}${isGroupActive ? ` ${styles.allToggleActive}` : ""}`}
+          onClick={onGroupClick}
+        >
+          All
+        </button>
+      </div>
 
-        return (
+      <div className={styles.pills}>
+        {categories.map(c => (
           <Pill
             key={c.category}
-            label={label}
-            active={isActive}
+            label={stripLabel(c.category)}
+            active={activeCategories.has(c.category)}
             onClick={() => onPillClick(c.category)}
-            pillBorder={pillBorder}
-            pillBg={pillBg}
+            variant={variant}
           />
-        );
-      })}
-    </>
+        ))}
+      </div>
+
+      {domainCards && domainCards.length > 0 && (
+        <div className={styles.domainGroup}>
+          <div className={styles.domainHeader}>
+            <span className={styles.domainLabel}>{domainLabel || "Domain Cards"}</span>
+            <button
+              className={`${styles.domainToggle}${allDomainActive ? ` ${styles.domainToggleActive}` : ""}`}
+              onClick={onDomainAllClick}
+            >
+              All {domainCards.length}
+            </button>
+          </div>
+          <div className={styles.domainPills}>
+            {domainCards.map(c => (
+              <Pill
+                key={c.category}
+                label={stripDomainLabel(c.category)}
+                active={activeCategories.has(c.category)}
+                onClick={() => onPillClick(c.category)}
+                variant="domains"
+                isDomain
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

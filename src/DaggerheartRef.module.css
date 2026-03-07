@@ -15,6 +15,7 @@
 
 .twoColumn {
   max-width: 1180px;
+  padding: 0 48px;
 }
 
 .actionPills {
@@ -25,13 +26,45 @@
   margin-bottom: 14px;
 }
 
+/* Wide: merge search + action pills into single toolbar row */
+.twoColumn .toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.twoColumn .toolbar .searchSlot {
+  flex: 1;
+  min-width: 0;
+}
+
+.twoColumn .toolbar .actionPills {
+  margin-bottom: 0;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+.twoColumn .toolbar .searchSlot search {
+  max-width: none;
+  margin-bottom: 0;
+}
+
 .pillGroups {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
   margin-bottom: 18px;
+}
+
+.twoColumn .pillGroups {
+  flex-direction: row;
+  gap: 40px;
+}
+
+.twoColumn .pillGroups > * {
+  flex: 1;
+  min-width: 0;
 }
 
 .clearPill {

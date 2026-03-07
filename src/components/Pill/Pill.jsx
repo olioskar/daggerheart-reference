@@ -1,12 +1,16 @@
 import styles from "./Pill.module.css";
 
-export function Pill({ label, active, onClick, pillBorder, pillBg }) {
+const activeClass = { rules: styles.activeAmber, cards: styles.activePurple, domains: styles.activePurple };
+
+export function Pill({ label, active, onClick, variant, isDomain }) {
+  const classes = [
+    styles.pill,
+    isDomain ? styles.domain : "",
+    active ? (activeClass[variant] || styles.active) : "",
+  ].filter(Boolean).join(" ");
+
   return (
-    <button
-      onClick={onClick}
-      className={`${styles.pill}${active ? ` ${styles.active}` : ""}`}
-      style={{ "--pill-border": pillBorder, "--pill-bg": pillBg }}
-    >
+    <button onClick={onClick} className={classes}>
       {label}
     </button>
   );
